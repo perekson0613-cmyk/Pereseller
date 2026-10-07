@@ -4,21 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pereseller PRO — Streetwear Reselling</title>
+<title>Pereseller — Centrum Resellu</title>
 
 <style>
 :root{
-    --bg:#07080c;
-    --panel:#0e1118;
-    --panel2:#131720;
-    --border:#242a36;
-    --text:#f7f8fb;
-    --muted:#929aaa;
-    --purple:#8b5cf6;
-    --purple2:#b197fc;
-    --green:#35d399;
-    --red:#fb7185;
-    --yellow:#fbbf24;
+    --black:#050605;
+    --black2:#0b0d0b;
+    --panel:#101310;
+    --panel2:#151915;
+    --white:#f5f7f5;
+    --gray:#9ba39c;
+    --green:#35e878;
+    --green2:#20b95a;
+    --line:#252b26;
+    --danger:#ff6666;
 }
 
 *{
@@ -32,561 +31,600 @@ html{
 }
 
 body{
-    font-family:Inter,Arial,sans-serif;
-    background:
-        radial-gradient(circle at 80% -10%,#251448 0,transparent 28%),
-        var(--bg);
-    color:var(--text);
+    background:var(--black);
+    color:var(--white);
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    line-height:1.6;
 }
 
-button,input,select{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-img{
-    display:block;
-    width:100%;
-}
-
-/* SIDEBAR */
+/* ================= SIDEBAR ================= */
 
 .sidebar{
     position:fixed;
     left:0;
     top:0;
-    width:245px;
-    height:100vh;
-    padding:25px 15px;
-    background:rgba(9,11,16,.96);
-    border-right:1px solid var(--border);
-    z-index:100;
+    bottom:0;
+    width:250px;
+    background:#070807;
+    border-right:1px solid var(--line);
+    padding:25px 17px;
+    z-index:10;
 }
 
 .logo{
-    padding:0 12px 28px;
-    font-size:25px;
+    font-size:26px;
     font-weight:900;
     letter-spacing:-1.5px;
+    padding:0 10px 30px;
 }
 
 .logo span{
-    color:var(--purple2);
+    color:var(--green);
+}
+
+.logo small{
+    font-size:9px;
+    border:1px solid var(--green2);
+    color:var(--green);
+    padding:3px 6px;
+    border-radius:20px;
+    margin-left:5px;
+    vertical-align:middle;
 }
 
 .menu-title{
-    color:#555e6e;
+    color:#626a63;
     font-size:10px;
-    font-weight:800;
-    letter-spacing:1.4px;
     text-transform:uppercase;
-    padding:15px 12px 8px;
+    letter-spacing:2px;
+    margin:18px 10px 8px;
 }
 
-.menu a{
+.nav a{
     display:flex;
-    gap:12px;
     align-items:center;
-    color:var(--muted);
-    padding:11px 12px;
-    margin-bottom:4px;
-    border-radius:10px;
+    gap:12px;
     text-decoration:none;
+    color:#aab0aa;
+    padding:11px 13px;
+    border-radius:10px;
     font-size:13px;
-    font-weight:700;
     transition:.2s;
 }
 
-.menu a:hover,
-.menu a.active{
-    background:#181527;
+.nav a:hover,
+.nav a.active{
+    background:#102017;
     color:white;
 }
 
-.icon{
-    width:23px;
-    text-align:center;
+.nav a.active{
+    border-left:3px solid var(--green);
 }
 
-/* MAIN */
+.sidebar-note{
+    position:absolute;
+    bottom:20px;
+    left:17px;
+    right:17px;
+    border:1px solid var(--line);
+    background:#0d100e;
+    padding:14px;
+    border-radius:12px;
+    font-size:11px;
+    color:#8e968f;
+}
+
+.sidebar-note strong{
+    color:var(--green);
+}
+
+/* ================= MAIN ================= */
 
 .main{
-    margin-left:245px;
-    min-height:100vh;
+    margin-left:250px;
 }
 
 .topbar{
-    height:70px;
-    padding:0 32px;
+    height:68px;
+    border-bottom:1px solid var(--line);
     display:flex;
     align-items:center;
     justify-content:space-between;
+    padding:0 32px;
     position:sticky;
     top:0;
-    z-index:50;
-    background:rgba(7,8,12,.78);
-    backdrop-filter:blur(20px);
-    border-bottom:1px solid var(--border);
+    background:rgba(5,6,5,.92);
+    backdrop-filter:blur(14px);
+    z-index:8;
 }
 
 .search{
-    width:330px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    background:#10131a;
-    border:1px solid var(--border);
-    border-radius:11px;
-    padding:10px 13px;
-}
-
-.search input{
-    width:100%;
-    border:0;
-    outline:0;
-    background:none;
+    width:430px;
+    max-width:55%;
+    background:#0d100e;
     color:white;
+    border:1px solid var(--line);
+    padding:11px 14px;
+    border-radius:10px;
+    outline:none;
 }
 
-.avatar{
-    width:38px;
-    height:38px;
-    display:grid;
-    place-items:center;
-    border-radius:11px;
-    background:linear-gradient(135deg,#8b5cf6,#4f46e5);
-    font-weight:900;
+.search:focus{
+    border-color:var(--green);
 }
 
-/* CONTENT */
+.status{
+    border:1px solid var(--line);
+    color:#b5bcb6;
+    padding:8px 12px;
+    border-radius:10px;
+    font-size:11px;
+}
 
-.content{
-    max-width:1500px;
+/* ================= CONTAINER ================= */
+
+.container{
+    max-width:1450px;
+    margin:auto;
     padding:35px;
 }
 
 .hero{
-    padding:34px;
-    border-radius:22px;
-    border:1px solid #31234f;
-    background:
-        radial-gradient(circle at 80% 20%,#39205e,transparent 35%),
-        linear-gradient(135deg,#11131b,#0d1016);
-    margin-bottom:25px;
+    display:grid;
+    grid-template-columns:1.5fr .5fr;
+    gap:15px;
 }
 
-.hero small{
-    color:var(--purple2);
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
+.hero-main,
+.hero-small,
+.card,
+.guide,
+.calculator,
+.tip,
+.brand-card{
+    background:linear-gradient(145deg,#111511,#0b0d0b);
+    border:1px solid var(--line);
+    border-radius:18px;
+}
+
+.hero-main{
+    padding:40px;
+    border-color:#21482f;
+    background:
+        radial-gradient(circle at 90% 10%,rgba(53,232,120,.12),transparent 30%),
+        linear-gradient(145deg,#101511,#080a08);
+}
+
+.eyebrow{
+    color:var(--green);
+    font-size:10px;
+    letter-spacing:2px;
+    font-weight:bold;
 }
 
 .hero h1{
-    font-size:42px;
-    line-height:1.05;
-    letter-spacing:-2px;
-    max-width:700px;
-    margin:10px 0;
+    font-size:clamp(40px,5vw,70px);
+    line-height:.95;
+    letter-spacing:-4px;
+    margin:15px 0;
 }
 
-.hero p{
-    color:var(--muted);
-    max-width:680px;
-    line-height:1.7;
-}
-
-.brands{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:20px;
-}
-
-.brand{
-    border:1px solid #343b49;
-    background:#11151d;
-    color:#dfe3eb;
-    padding:8px 12px;
-    border-radius:100px;
-    font-size:11px;
-    font-weight:800;
-}
-
-/* CARDS */
-
-.card{
-    background:linear-gradient(145deg,#11141b,#0d1015);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:21px;
-}
-
-.section{
-    margin-top:28px;
-}
-
-.section-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-    margin-bottom:15px;
-}
-
-.section-head h2{
-    font-size:24px;
-    letter-spacing:-.7px;
-}
-
-.section-head p{
-    color:var(--muted);
-    font-size:12px;
-}
-
-/* BRAND FILTER */
-
-.filters{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-bottom:18px;
-}
-
-.filter{
-    background:#11151d;
-    border:1px solid var(--border);
-    color:#aeb5c2;
-    padding:9px 13px;
-    border-radius:9px;
-    font-size:12px;
-    font-weight:700;
-}
-
-.filter.active,
-.filter:hover{
-    color:white;
-    border-color:#7252ba;
-    background:#1a1530;
-}
-
-/* PHOTO GUIDE */
-
-.photo-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-}
-
-.photo-card{
-    overflow:hidden;
-    border-radius:16px;
-    border:1px solid var(--border);
-    background:#0c0f14;
-    transition:.25s;
-}
-
-.photo-card:hover{
-    transform:translateY(-4px);
-    border-color:#59427f;
-}
-
-.photo{
-    height:270px;
-    overflow:hidden;
-    position:relative;
-    background:#181b22;
-}
-
-.photo img{
-    height:100%;
-    object-fit:cover;
-    transition:.4s;
-}
-
-.photo-card:hover img{
-    transform:scale(1.04);
-}
-
-.photo-label{
-    position:absolute;
-    top:12px;
-    left:12px;
-    padding:6px 9px;
-    border-radius:7px;
-    background:rgba(0,0,0,.7);
-    backdrop-filter:blur(8px);
-    font-size:10px;
-    font-weight:800;
-}
-
-.photo-info{
-    padding:16px;
-}
-
-.photo-info h3{
-    font-size:15px;
-    margin-bottom:7px;
-}
-
-.photo-info p{
-    color:var(--muted);
-    line-height:1.55;
-    font-size:12px;
-}
-
-.good{
+.hero h1 span{
     color:var(--green);
 }
 
-.bad{
-    color:var(--red);
+.hero p{
+    color:#9ca49d;
+    max-width:720px;
+    font-size:14px;
 }
 
-/* LISTING EXAMPLES */
+.hero-buttons{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
 
-.listing-grid{
+.btn{
+    border:1px solid var(--line);
+    background:#101410;
+    color:white;
+    text-decoration:none;
+    padding:11px 15px;
+    border-radius:10px;
+    font-size:12px;
+    cursor:pointer;
+}
+
+.btn.green{
+    background:var(--green);
+    color:#031108;
+    border-color:var(--green);
+    font-weight:800;
+}
+
+.hero-side{
+    display:grid;
+    gap:14px;
+}
+
+.hero-small{
+    padding:23px;
+}
+
+.hero-small .number{
+    font-size:32px;
+    font-weight:900;
+    color:var(--green);
+}
+
+.muted{
+    color:var(--gray);
+    font-size:11px;
+}
+
+/* ================= STATS ================= */
+
+.stats{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:15px;
+    gap:12px;
+    margin-top:14px;
 }
 
-.listing{
-    background:#10131a;
-    border:1px solid var(--border);
-    border-radius:15px;
-    overflow:hidden;
-}
-
-.listing-img{
-    height:250px;
-    overflow:hidden;
-}
-
-.listing-img img{
-    height:100%;
-    object-fit:cover;
-}
-
-.listing-body{
-    padding:14px;
-}
-
-.listing-brand{
-    font-size:10px;
-    text-transform:uppercase;
-    color:var(--purple2);
-    font-weight:900;
-}
-
-.listing h3{
-    font-size:14px;
-    margin:6px 0;
-}
-
-.listing p{
-    color:var(--muted);
-    font-size:11px;
-    line-height:1.5;
-}
-
-.price{
-    margin-top:10px;
-    font-size:18px;
-    font-weight:900;
-}
-
-/* TIPS */
-
-.tips{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.tip{
+.stat{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
     padding:20px;
-    border:1px solid var(--border);
-    border-radius:16px;
-    background:#11141a;
 }
 
-.tip-number{
-    color:var(--purple2);
-    font-size:11px;
-    font-weight:900;
+.stat strong{
+    font-size:27px;
+    display:block;
+    margin:5px 0;
 }
 
-.tip h3{
-    margin:9px 0;
+.stat.green strong{
+    color:var(--green);
 }
 
-.tip p{
-    color:var(--muted);
-    font-size:13px;
-    line-height:1.6;
+/* ================= SECTION ================= */
+
+.section{
+    margin-top:38px;
 }
 
-/* CHECKLIST */
-
-.checklist{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
+.section-header{
+    margin-bottom:15px;
 }
 
-.check{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    background:#0d1015;
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:13px;
-    color:#d1d5dd;
+.section-header h2{
+    font-size:25px;
+    letter-spacing:-1px;
+}
+
+.section-header p{
+    color:var(--gray);
     font-size:12px;
 }
 
-.check input{
-    accent-color:var(--purple);
-}
-
-/* BRAND CARDS */
+/* ================= BRAND ================= */
 
 .brand-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:15px;
+    gap:13px;
 }
 
 .brand-card{
-    min-height:180px;
-    border:1px solid var(--border);
-    border-radius:17px;
     padding:20px;
-    display:flex;
-    flex-direction:column;
-    justify-content:end;
-    overflow:hidden;
-    position:relative;
-    background:
-        linear-gradient(145deg,#191c24,#0e1015);
+    transition:.2s;
 }
 
-.brand-card:after{
-    content:"";
-    position:absolute;
-    width:140px;
-    height:140px;
-    right:-40px;
-    top:-40px;
-    background:#8b5cf6;
-    filter:blur(70px);
-    opacity:.25;
+.brand-card:hover{
+    transform:translateY(-3px);
+    border-color:#397d50;
 }
 
-.brand-card h3{
-    position:relative;
-    z-index:2;
-    font-size:20px;
+.brand-name{
+    font-size:18px;
+    font-weight:900;
 }
 
 .brand-card p{
-    position:relative;
-    z-index:2;
-    color:var(--muted);
+    color:#929b94;
     font-size:11px;
-    margin-top:6px;
+    margin-top:8px;
 }
 
-/* RESPONSIVE */
+.brand-card .brand-tip{
+    color:var(--green);
+    font-size:11px;
+    margin-top:14px;
+}
+
+/* ================= TIPS ================= */
+
+.tip-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:13px;
+}
+
+.tip{
+    padding:21px;
+}
+
+.tip-number{
+    color:var(--green);
+    font-size:11px;
+    font-weight:bold;
+}
+
+.tip h3{
+    font-size:15px;
+    margin:8px 0;
+}
+
+.tip p{
+    color:#9ba39d;
+    font-size:11px;
+}
+
+.tip ul{
+    margin-top:10px;
+    padding-left:18px;
+}
+
+.tip li{
+    color:#aab1aa;
+    font-size:11px;
+    margin:5px 0;
+}
+
+/* ================= BIG GUIDE ================= */
+
+.guide-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.guide{
+    padding:24px;
+}
+
+.guide h3{
+    margin-bottom:13px;
+    font-size:18px;
+}
+
+.guide h3 span{
+    color:var(--green);
+}
+
+.guide ul{
+    padding-left:20px;
+}
+
+.guide li{
+    color:#a7afa8;
+    font-size:12px;
+    margin:7px 0;
+}
+
+/* ================= CALCULATOR ================= */
+
+.calculator{
+    padding:24px;
+}
+
+.calc-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.field label{
+    color:#89928b;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.field input{
+    background:#080a08;
+    color:white;
+    border:1px solid var(--line);
+    border-radius:9px;
+    padding:11px;
+    outline:none;
+}
+
+.field input:focus{
+    border-color:var(--green);
+}
+
+.result{
+    grid-column:1/-1;
+    margin-top:5px;
+    padding:18px;
+    border:1px solid #225634;
+    border-radius:12px;
+    background:#0d1910;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.profit{
+    font-size:27px;
+    color:var(--green);
+    font-weight:900;
+}
+
+/* ================= CHECKLIST ================= */
+
+.check-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
+}
+
+.check{
+    padding:13px;
+    border:1px solid var(--line);
+    background:#0c0e0c;
+    border-radius:10px;
+    color:#adb4ae;
+    font-size:12px;
+}
+
+.check input{
+    accent-color:var(--green);
+    margin-right:8px;
+}
+
+/* ================= RULES ================= */
+
+.rules{
+    border:1px solid #2b392f;
+    background:#0b110d;
+    border-radius:15px;
+    padding:24px;
+}
+
+.rules h3{
+    color:var(--green);
+    margin-bottom:12px;
+}
+
+.rules p{
+    color:#a3aba5;
+    font-size:12px;
+    margin:8px 0;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    border-top:1px solid var(--line);
+    margin-top:50px;
+    padding:30px 0;
+    color:#636b64;
+    font-size:10px;
+    text-align:center;
+}
+
+/* ================= RESPONSIVE ================= */
 
 @media(max-width:1100px){
-
-    .listing-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
     .brand-grid{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .photo-grid{
+    .tip-grid{
         grid-template-columns:repeat(2,1fr);
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero{
+        grid-template-columns:1fr;
     }
 }
 
 @media(max-width:800px){
-
     .sidebar{
-        width:64px;
-        padding:20px 8px;
+        width:70px;
+        padding:15px 8px;
     }
 
     .logo{
         font-size:0;
         text-align:center;
-        padding-left:0;
-        padding-right:0;
+        padding-bottom:20px;
     }
 
-    .logo:before{
-        content:"P";
-        color:var(--purple2);
-        font-size:25px;
+    .logo span{
+        font-size:21px;
     }
 
-    .logo span,
-    .menu-title{
+    .logo small,
+    .menu-title,
+    .nav span,
+    .sidebar-note{
         display:none;
     }
 
-    .menu a{
+    .nav a{
         justify-content:center;
-        font-size:0;
+        font-size:18px;
     }
 
     .main{
-        margin-left:64px;
+        margin-left:70px;
     }
 
     .topbar{
         padding:0 15px;
     }
 
-    .search{
-        width:200px;
+    .container{
+        padding:20px;
     }
 
-    .content{
-        padding:20px 14px;
-    }
-
-    .hero h1{
-        font-size:31px;
-    }
-
-    .tips{
+    .guide-grid{
         grid-template-columns:1fr;
+    }
+
+    .calc-grid{
+        grid-template-columns:1fr 1fr;
     }
 }
 
-@media(max-width:550px){
+@media(max-width:520px){
+    .brand-grid,
+    .tip-grid,
+    .stats,
+    .check-grid,
+    .calc-grid{
+        grid-template-columns:1fr;
+    }
 
     .search{
+        max-width:65%;
+    }
+
+    .status{
         display:none;
     }
 
-    .photo-grid,
-    .listing-grid,
-    .brand-grid{
-        grid-template-columns:1fr;
+    .hero-main{
+        padding:25px;
     }
 
-    .checklist{
-        grid-template-columns:1fr;
+    .hero h1{
+        font-size:43px;
+        letter-spacing:-2.5px;
+    }
+
+    .result{
+        grid-column:auto;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
     }
 }
 </style>
@@ -594,905 +632,959 @@ img{
 
 <body>
 
+<!-- ================= SIDEBAR ================= -->
+
 <aside class="sidebar">
 
     <div class="logo">
-        Pe<span>reseller</span>
+        PERE<span>SELLER</span>
+        <small>PRO</small>
     </div>
 
-    <div class="menu-title">Główne</div>
+    <div class="menu-title">Nawigacja</div>
 
-    <nav class="menu">
-
-        <a class="active" href="#start">
-            <span class="icon">⌂</span>
-            Start
-        </a>
-
-        <a href="#photos">
-            <span class="icon">📸</span>
-            Zdjęcia
-        </a>
-
-        <a href="#brands">
-            <span class="icon">◆</span>
-            Marki
-        </a>
-
-        <a href="#listings">
-            <span class="icon">▣</span>
-            Ogłoszenia
-        </a>
-
-        <a href="#tips">
-            <span class="icon">✦</span>
-            Porady
-        </a>
-
-        <a href="#checklist">
-            <span class="icon">✓</span>
-            Checklista
-        </a>
-
+    <nav class="nav">
+        <a href="#home" class="active">⌂ <span>Start</span></a>
+        <a href="#brands">◆ <span>Marki</span></a>
+        <a href="#porady">✦ <span>Porady</span></a>
+        <a href="#vinted">▣ <span>Vinted</span></a>
+        <a href="#calculator">◫ <span>Kalkulator</span></a>
+        <a href="#checklist">✓ <span>Checklist</span></a>
     </nav>
+
+    <div class="menu-title">Najważniejsze</div>
+
+    <nav class="nav">
+        <a href="#zakupy">₽ <span>Zakupy</span></a>
+        <a href="#ceny">↗ <span>Ceny</span></a>
+        <a href="#zdjecia">▧ <span>Zdjęcia</span></a>
+        <a href="#autentycznosc">✓ <span>Autentyczność</span></a>
+    </nav>
+
+    <div class="sidebar-note">
+        <strong>PERSELLER RULE</strong><br><br>
+        Nie kupuj tylko dlatego, że rzecz jest tania.
+        Kupuj wtedy, kiedy widzisz potencjał na sprzedaż.
+    </div>
 
 </aside>
 
+<!-- ================= MAIN ================= -->
 
 <main class="main">
 
 <header class="topbar">
+    <input
+        class="search"
+        id="search"
+        type="text"
+        placeholder="Szukaj porady..."
+        oninput="searchTips()"
+    >
 
-    <div class="search">
-        🔎
-        <input
-            id="search"
-            placeholder="Szukaj poradnika..."
-            oninput="searchCards()"
-        >
+    <div class="status">
+        ● SYSTEM ONLINE
     </div>
-
-    <div class="avatar">
-        P
-    </div>
-
 </header>
 
+<div class="container">
 
-<div class="content" id="start">
+<!-- ================= HERO ================= -->
 
-<!-- HERO -->
+<section class="hero" id="home">
 
-<section class="hero">
+    <div class="hero-main">
 
-    <small>PERSELLER PRO / STREETWEAR</small>
+        <div class="eyebrow">
+            PERESELLER / STREETWEAR / VINTED
+        </div>
 
-    <h1>
-        Twój wizualny poradnik
-        resellingu na Vinted.
-    </h1>
+        <h1>
+            Naucz się<br>
+            <span>robić resell.</span>
+        </h1>
 
-    <p>
-        Skupiamy się na markach, które interesują
-        streetwearowych resellerów. Ucz się na
-        przykładach Polo Ralph Lauren, Denim Tears,
-        Nike i Corteiz.
-    </p>
+        <p>
+            Pereseller to centrum wiedzy dla osoby, która chce kupować
+            dobrze, sprzedawać mądrze i nie przepalać pieniędzy.
+            Znajdziesz tutaj ogromną bazę porad dotyczących Vinted,
+            streetwearu, cen, zdjęć, negocjacji, autentyczności
+            i budowania własnego resellu.
+        </p>
 
-    <div class="brands">
-        <span class="brand">POLO RALPH LAUREN</span>
-        <span class="brand">DENIM TEARS</span>
-        <span class="brand">NIKE</span>
-        <span class="brand">CORTEIZ</span>
+        <div class="hero-buttons">
+            <a href="#porady" class="btn green">Zobacz porady</a>
+            <a href="#calculator" class="btn">Policz zysk</a>
+            <a href="#checklist" class="btn">Checklist</a>
+        </div>
+
+    </div>
+
+    <div class="hero-side">
+
+        <div class="hero-small">
+            <div class="muted">Główne marki</div>
+            <div class="number">04</div>
+            <div class="muted">
+                Polo Ralph Lauren / Denim Tears / Nike / Corteiz
+            </div>
+        </div>
+
+        <div class="hero-small">
+            <div class="muted">Najważniejsza zasada</div>
+            <div class="number">01</div>
+            <div class="muted">
+                Najpierw sprawdź rynek, potem kupuj.
+            </div>
+        </div>
+
     </div>
 
 </section>
 
+<!-- ================= STATS ================= -->
 
-<!-- BRAND SECTION -->
+<section class="stats">
+
+    <div class="stat green">
+        <div class="muted">Cel</div>
+        <strong>BUY LOW</strong>
+        <div class="muted">Kupuj poniżej realnej wartości.</div>
+    </div>
+
+    <div class="stat">
+        <div class="muted">Proces</div>
+        <strong>LIST FAST</strong>
+        <div class="muted">Wystawiaj produkt szybko.</div>
+    </div>
+
+    <div class="stat">
+        <div class="muted">Strategia</div>
+        <strong>SELL SMART</strong>
+        <div class="muted">Cena + zdjęcia + opis.</div>
+    </div>
+
+    <div class="stat">
+        <div class="muted">Najważniejsze</div>
+        <strong>PROFIT</strong>
+        <div class="muted">Licz cały koszt transakcji.</div>
+    </div>
+
+</section>
+
+<!-- ================= BRANDS ================= -->
 
 <section class="section" id="brands">
 
-<div class="section-head">
-    <div>
-        <h2>Marki w Pereseller</h2>
-        <p>Przykłady używane w poradnikach</p>
-    </div>
-</div>
-
-<div class="brand-grid">
-
-    <div class="brand-card">
-        <h3>Polo Ralph Lauren</h3>
-        <p>Metki, hafty, stan, materiał i detale.</p>
+    <div class="section-header">
+        <h2>Marki, które warto znać</h2>
+        <p>
+            Każda marka ma inną klientelę, cenę, popyt i sposób oceniania produktu.
+        </p>
     </div>
 
-    <div class="brand-card">
-        <h3>Denim Tears</h3>
-        <p>Detale, nadruki, metki i dokumentowanie stanu.</p>
-    </div>
+    <div class="brand-grid">
 
-    <div class="brand-card">
-        <h3>Nike</h3>
-        <p>Buty, ubrania, metki, podeszwy i szczegóły.</p>
-    </div>
+        <div class="brand-card">
+            <div class="brand-name">Polo Ralph Lauren</div>
+            <p>
+                Klasyczny brand z ogromną liczbą wariantów.
+                Vintage, rugby, knit, quarter zip, polo, kurtki.
+            </p>
+            <div class="brand-tip">
+                TIP: Naucz się rozpoznawać metki z różnych okresów.
+            </div>
+        </div>
 
-    <div class="brand-card">
-        <h3>Corteiz</h3>
-        <p>Detale produktu, grafika i zdjęcia zbliżeniowe.</p>
-    </div>
+        <div class="brand-card">
+            <div class="brand-name">Denim Tears</div>
+            <p>
+                Mocny streetwear i duży nacisk na konkretne
+                kolekcje oraz charakterystyczne grafiki.
+            </p>
+            <div class="brand-tip">
+                TIP: Sprawdzaj kolekcję, grafikę i szczegóły produktu.
+            </div>
+        </div>
 
-</div>
+        <div class="brand-card">
+            <div class="brand-name">Nike</div>
+            <p>
+                Ogromny rynek. Vintage, Tech Fleece, ACG,
+                Stüssy collaby, football, running i wiele więcej.
+            </p>
+            <div class="brand-tip">
+                TIP: Sam napis Nike nie oznacza wysokiej wartości.
+            </div>
+        </div>
+
+        <div class="brand-card">
+            <div class="brand-name">Corteiz</div>
+            <p>
+                Streetwear oparty na hype, limitowanych dropach
+                i charakterystycznym branding'u.
+            </p>
+            <div class="brand-tip">
+                TIP: Sprawdź konkretny model przed wyceną.
+            </div>
+        </div>
+
+    </div>
 
 </section>
 
+<!-- ================= MASSIVE TIPS ================= -->
 
-<!-- PHOTO GUIDE -->
+<section class="section" id="porady">
 
-<section class="section" id="photos">
-
-<div class="section-head">
-    <div>
-        <h2>📸 Jak robić zdjęcia?</h2>
-        <p>Najważniejsza część dobrego ogłoszenia</p>
+    <div class="section-header">
+        <h2>Ogromna baza porad</h2>
+        <p>
+            Zapisz tę stronę. To jest Twój podręczny podręcznik resellu.
+        </p>
     </div>
-</div>
 
-<div class="filters">
-
-    <button class="filter active" onclick="filterPhotos('all',this)">
-        Wszystko
-    </button>
-
-    <button class="filter" onclick="filterPhotos('setup',this)">
-        Ustawienie
-    </button>
-
-    <button class="filter" onclick="filterPhotos('detail',this)">
-        Detale
-    </button>
-
-    <button class="filter" onclick="filterPhotos('defect',this)">
-        Wady
-    </button>
-
-    <button class="filter" onclick="filterPhotos('measure',this)">
-        Wymiary
-    </button>
-
-</div>
-
-
-<div class="photo-grid">
-
-
-<!-- PHOTO 1 -->
-
-<article class="photo-card photo-item setup">
-
-<div class="photo">
-
-<img
-src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=1000&q=85"
-alt="Przykład fotografowania odzieży"
->
-
-<span class="photo-label">
-    POLO RALPH LAUREN
-</span>
-
-</div>
-
-<div class="photo-info">
-
-<h3>
-    01. Cały produkt
-</h3>
-
-<p>
-    Ubranie powinno być pokazane w całości.
-    Zadbaj o czyste tło i dobre światło.
-</p>
-
-</div>
-
-</article>
-
-
-<!-- PHOTO 2 -->
-
-<article class="photo-card photo-item setup">
-
-<div class="photo">
-
-<img
-src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1000&q=85"
-alt="Odzież przygotowana do zdjęcia"
->
-
-<span class="photo-label">
-    DENIM TEARS
-</span>
-
-</div>
-
-<div class="photo-info">
-
-<h3>
-    02. Czyste tło
-</h3>
-
-<p>
-    Usuń wszystko, co odciąga uwagę od produktu.
-    Produkt ma być głównym bohaterem.
-</p>
-
-</div>
-
-</article>
-
-
-<!-- PHOTO 3 -->
-
-<article class="photo-card photo-item detail">
-
-<div class="photo">
-
-<img
-src="https://images.unsplash.com/photo-1583743814966-8936f37f4678?auto=format&fit=crop&w=1000&q=85"
-alt="Detal ubrania"
->
-
-<span class="photo-label">
-    NIKE
-</span>
-
-</div>
-
-<div class="photo-info">
-
-<h3>
-    03. Logo / detal
-</h3>
-
-<p>
-    Dodaj osobne ujęcie logo, haftu, nadruku
-    albo charakterystycznego elementu produktu.
-</p>
-
-</div>
-
-</article>
-
-
-<!-- PHOTO 4 -->
-
-<article class="photo-card photo-item detail">
-
-<div class="photo">
-
-<img
-src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=1000&q=85"
-alt="Detal obuwia"
->
-
-<span class="photo-label">
-    NIKE
-</span>
-
-</div>
-
-<div class="photo-info">
-
-<h3>
-    04. Produkt z bliska
-</h3>
-
-<p>
-    Przy obuwiu pokaż dodatkowo charakterystyczne
-    elementy, podeszwę i stan materiału.
-</p>
-
-</div>
-
-</article>
-
-
-<!-- PHOTO 5 -->
-
-<article class="photo-card photo-item measure">
-
-<div class="photo">
-
-<img
-src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=1000&q=85"
-alt="Pomiar ubrania"
->
-
-<span class="photo-label">
-    CORTEIZ
-</span>
-
-</div>
-
-<div class="photo-info">
-
-<h3>
-    05. Wymiary
-</h3>
-
-<p>
-    Przy ubraniach możesz pokazać pomiar,
-    aby kupujący łatwiej ocenił rozmiar.
-</p>
-
-</div>
-
-</article>
-
-
-<!-- PHOTO 6 -->
-
-<article class="photo-card photo-item detail">
-
-<div class="photo">
-
-<img
-src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=1000&q=85"
-alt="Metka ubrania"
->
-
-<span class="photo-label">
-    POLO RALPH LAUREN
-</span>
-
-</div>
-
-<div class="photo-info">
-
-<h3>
-    06. Metka
-</h3>
-
-<p>
-    Zrób wyraźne zdjęcie metki, rozmiaru
-    i informacji o materiale.
-</p>
-
-</div>
-
-</article>
-
-
-<!-- PHOTO 7 -->
-
-<article class="photo-card photo-item defect">
-
-<div class="photo">
-
-<img
-src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=1000&q=85"
-alt="Detal materiału"
->
-
-<span class="photo-label">
-    DENIM TEARS
-</span>
-
-</div>
-
-<div class="photo-info">
-
-<h3>
-    07. Wada / zużycie
-</h3>
-
-<p>
-    Jeśli produkt ma widoczną wadę, pokaż ją
-    na osobnym zdjęciu i opisz ją uczciwie.
-</p>
-
-</div>
-
-</article>
-
-
-<!-- PHOTO 8 -->
-
-<article class="photo-card photo-item setup">
-
-<div class="photo">
-
-<img
-src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=85"
-alt="Stylizacja streetwear"
->
-
-<span class="photo-label">
-    CORTEIZ
-</span>
-
-</div>
-
-<div class="photo-info">
-
-<h3>
-    08. Zdjęcie kontekstowe
-</h3>
-
-<p>
-    Dodatkowe zdjęcie może pokazać fason
-    i charakter produktu.
-</p>
-
-</div>
-
-</article>
-
-
-<!-- PHOTO 9 -->
-
-<article class="photo-card photo-item detail">
-
-<div class="photo">
-
-<img
-src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=1000&q=85"
-alt="Detal odzieży"
->
-
-<span class="photo-label">
-    POLO RALPH LAUREN
-</span>
-
-</div>
-
-<div class="photo-info">
-
-<h3>
-    09. Materiał
-</h3>
-
-<p>
-    Pokaż fakturę materiału, jeśli jest ona
-    istotna dla produktu.
-</p>
-
-</div>
-
-</article>
-
-</div>
+    <div class="tip-grid" id="tips">
+
+        <article class="tip">
+            <div class="tip-number">01 / ZAKUPY</div>
+            <h3>Nie kupuj w ciemno</h3>
+            <p>
+                Zanim zapłacisz, wyszukaj dokładny model i zobacz,
+                za ile podobne rzeczy faktycznie są wystawiane.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">02 / ZAKUPY</div>
+            <h3>Patrz na realny popyt</h3>
+            <p>
+                Dużo ogłoszeń nie oznacza, że produkt szybko się sprzedaje.
+                Szukaj rzeczy, których ludzie rzeczywiście szukają.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">03 / ZAKUPY</div>
+            <h3>Zostaw margines</h3>
+            <p>
+                Jeśli zakup kosztuje 100 zł, nie zakładaj automatycznie,
+                że sprzedaż za 120 zł jest dobrym biznesem.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">04 / CENA</div>
+            <h3>Nie patrz tylko na najwyższą cenę</h3>
+            <p>
+                Najdroższe ogłoszenie może wisieć miesiącami.
+                Cena musi być atrakcyjna względem podobnych ofert.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">05 / CENA</div>
+            <h3>Negocjacja to część gry</h3>
+            <p>
+                Możesz wystawić trochę wyżej, zostawiając przestrzeń
+                na rozsądną negocjację.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">06 / CENA</div>
+            <h3>Nie przeceniaj dobrego produktu</h3>
+            <p>
+                Jeśli rzecz jest rzadka i ma dobry popyt,
+                nie musisz od razu schodzić do najniższej ceny.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">07 / ZDJĘCIA</div>
+            <h3>Pierwsze zdjęcie sprzedaje</h3>
+            <p>
+                Pierwsze zdjęcie powinno od razu pokazywać,
+                co dokładnie kupujący dostanie.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">08 / ZDJĘCIA</div>
+            <h3>Światło ma znaczenie</h3>
+            <p>
+                Naturalne, równomierne światło zwykle pokazuje
+                kolor i stan produktu lepiej niż ciemne zdjęcie.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">09 / ZDJĘCIA</div>
+            <h3>Nie chowaj wad</h3>
+            <p>
+                Pokaż plamy, przetarcia, pęknięcia i inne problemy.
+                Zwiększa to wiarygodność oferty.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">10 / OPIS</div>
+            <h3>Opis ma odpowiadać na pytania</h3>
+            <p>
+                Marka, rozmiar, stan, wymiary, model, wady,
+                materiał i najważniejsze detale.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">11 / OPIS</div>
+            <h3>Nie przesadzaj z hasłami</h3>
+            <p>
+                Nie wpisuj „rare”, „grail” czy „100% authentic”,
+                jeśli nie masz podstaw, żeby tak twierdzić.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">12 / OPIS</div>
+            <h3>Wymiary pomagają</h3>
+            <p>
+                Szczególnie przy vintage podaj długość, szerokość,
+                rękaw i inne istotne wymiary.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">13 / AUTENTYCZNOŚĆ</div>
+            <h3>Nie oceniaj po jednej metce</h3>
+            <p>
+                Sprawdzaj cały produkt: metki, szycie, materiał,
+                nadruki, detale, konstrukcję i pochodzenie.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">14 / AUTENTYCZNOŚĆ</div>
+            <h3>Porównuj wiele przykładów</h3>
+            <p>
+                Jeden egzemplarz referencyjny nie wystarczy.
+                Różne kolekcje mogą mieć różne szczegóły.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">15 / AUTENTYCZNOŚĆ</div>
+            <h3>Uważaj na zbyt dobrą okazję</h3>
+            <p>
+                Bardzo niska cena + popularna marka + brak szczegółowych
+                zdjęć = powód do dodatkowej ostrożności.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">16 / VINTED</div>
+            <h3>Wybierz właściwą kategorię</h3>
+            <p>
+                Błędna kategoria może utrudnić znalezienie produktu
+                przez osoby szukające konkretnego typu odzieży.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">17 / VINTED</div>
+            <h3>Wpisuj poprawną markę</h3>
+            <p>
+                Nie dodawaj losowych marek tylko po to,
+                żeby zwiększyć liczbę wyszukiwań.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">18 / VINTED</div>
+            <h3>Odpisuj sprawnie</h3>
+            <p>
+                Szybka i konkretna odpowiedź może zdecydować,
+                czy kupujący zostanie przy Twojej ofercie.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">19 / NEGOCJACJE</div>
+            <h3>Nie obrażaj się na ofertę</h3>
+            <p>
+                Niska oferta to część marketplace'u.
+                Możesz odmówić albo zaproponować swoją cenę.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">20 / NEGOCJACJE</div>
+            <h3>Znaj swoją minimalną cenę</h3>
+            <p>
+                Przed wystawieniem ustal cenę,
+                poniżej której sprzedaż przestaje Ci się opłacać.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">21 / MAGAZYN</div>
+            <h3>Nie kupuj wszystkiego</h3>
+            <p>
+                Kapitał zamrożony w słabych produktach nie pracuje.
+                Lepiej mieć mniej dobrych rzeczy niż dużo przypadkowych.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">22 / MAGAZYN</div>
+            <h3>Kontroluj, co się nie sprzedaje</h3>
+            <p>
+                Jeśli produkt długo stoi, sprawdź zdjęcia,
+                cenę, tytuł i popyt zamiast tylko czekać.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">23 / STATYSTYKI</div>
+            <h3>Mierz czas sprzedaży</h3>
+            <p>
+                Zapisuj, ile dni potrzebował produkt,
+                żeby zobaczyć, które rzeczy są naprawdę dobre.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">24 / STATYSTYKI</div>
+            <h3>Licz średni profit</h3>
+            <p>
+                Jeden duży profit nie oznacza, że cały model biznesowy działa.
+                Patrz na średnią z wielu transakcji.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">25 / ROZWÓJ</div>
+            <h3>Specjalizuj się</h3>
+            <p>
+                Znajomość kilku konkretnych nisz może dać Ci przewagę
+                nad osobą, która próbuje sprzedawać wszystko.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">26 / ROZWÓJ</div>
+            <h3>Ucz się metek</h3>
+            <p>
+                Poznawaj różne okresy, kolekcje i typy produkcji.
+                Wiedza pomaga szybciej filtrować okazje.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">27 / ROZWÓJ</div>
+            <h3>Buduj reputację</h3>
+            <p>
+                Dobry kontakt, dokładne opisy, szybka wysyłka
+                i uczciwość są ważniejsze niż jeden szybki profit.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">28 / ROZWÓJ</div>
+            <h3>Reinvestuj rozsądnie</h3>
+            <p>
+                Część zysku możesz przeznaczyć na kolejne produkty,
+                ale nie ryzykuj całego kapitału jednym zakupem.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">29 / BŁĘDY</div>
+            <h3>Nie kopiuj innych sprzedawców bezmyślnie</h3>
+            <p>
+                To, że ktoś wystawił produkt za konkretną cenę,
+                nie znaczy, że właśnie za tyle go sprzeda.
+            </p>
+        </article>
+
+        <article class="tip">
+            <div class="tip-number">30 / BŁĘDY</div>
+            <h3>Nie ignoruj stanu</h3>
+            <p>
+                Ten sam model w stanie idealnym i mocno zużytym
+                może mieć zupełnie inną wartość.
+            </p>
+        </article>
+
+    </div>
 
 </section>
 
+<!-- ================= ZAKUPY ================= -->
 
-<!-- LISTINGS -->
+<section class="section" id="zakupy">
 
-<section class="section" id="listings">
-
-<div class="section-head">
-    <div>
-        <h2>🛍️ Przykładowe listingi</h2>
-        <p>Jak może wyglądać komplet zdjęć produktu</p>
+    <div class="section-header">
+        <h2>Jak znaleźć dobrą okazję</h2>
+        <p>Proces, który warto wykonać przed każdym zakupem.</p>
     </div>
-</div>
 
-<div class="listing-grid">
+    <div class="guide-grid">
 
-<div class="listing">
+        <div class="guide">
+            <h3><span>01.</span> Znajdź produkt</h3>
+            <ul>
+                <li>Przeglądaj nowe ogłoszenia.</li>
+                <li>Sprawdzaj różne warianty nazwy produktu.</li>
+                <li>Szukaj literówek w nazwach.</li>
+                <li>Sprawdzaj mniej popularne kategorie.</li>
+                <li>Szukaj konkretnych modeli zamiast tylko marki.</li>
+                <li>Patrz na zdjęcia, nie tylko tytuł.</li>
+            </ul>
+        </div>
 
-<div class="listing-img">
+        <div class="guide">
+            <h3><span>02.</span> Oceń okazję</h3>
+            <ul>
+                <li>Sprawdź podobne ceny.</li>
+                <li>Sprawdź stan.</li>
+                <li>Sprawdź rozmiar.</li>
+                <li>Sprawdź kompletność produktu.</li>
+                <li>Sprawdź autentyczność.</li>
+                <li>Oszacuj potencjalny profit.</li>
+            </ul>
+        </div>
 
-<img
-src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85"
-alt="Przykład stylizacji Polo Ralph Lauren"
->
+        <div class="guide">
+            <h3><span>03.</span> Zadaj pytania</h3>
+            <ul>
+                <li>Czy są jakieś wady?</li>
+                <li>Czy wszystkie metki są na miejscu?</li>
+                <li>Jaki jest dokładny rozmiar?</li>
+                <li>Czy możesz dostać dodatkowe zdjęcia?</li>
+                <li>Czy produkt był prany/używany?</li>
+            </ul>
+        </div>
 
-</div>
+        <div class="guide">
+            <h3><span>04.</span> Podejmij decyzję</h3>
+            <ul>
+                <li>Nie spiesz się tylko dlatego, że produkt wygląda tanio.</li>
+                <li>Nie ignoruj czerwonych flag.</li>
+                <li>Zostaw margines bezpieczeństwa.</li>
+                <li>Jeśli liczby się nie zgadzają — odpuść.</li>
+            </ul>
+        </div>
 
-<div class="listing-body">
-
-<div class="listing-brand">
-POLO RALPH LAUREN
-</div>
-
-<h3>
-Polo Ralph Lauren — bluza
-</h3>
-
-<p>
-Stan bardzo dobry • zdjęcia metki •
-dokładny opis ewentualnych wad
-</p>
-
-<div class="price">
-85 zł
-</div>
-
-</div>
-
-</div>
-
-
-<div class="listing">
-
-<div class="listing-img">
-
-<img
-src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=900&q=85"
-alt="Przykład odzieży streetwear"
->
-
-</div>
-
-<div class="listing-body">
-
-<div class="listing-brand">
-DENIM TEARS
-</div>
-
-<h3>
-Denim Tears — T-shirt
-</h3>
-
-<p>
-Zdjęcie przodu • tyłu • metki •
-detalu grafiki
-</p>
-
-<div class="price">
-120 zł
-</div>
-
-</div>
-
-</div>
-
-
-<div class="listing">
-
-<div class="listing-img">
-
-<img
-src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85"
-alt="Przykład butów Nike"
->
-
-</div>
-
-<div class="listing-body">
-
-<div class="listing-brand">
-NIKE
-</div>
-
-<h3>
-Nike — sneakersy
-</h3>
-
-<p>
-Przód • bok • tył • podeszwa •
-metka rozmiarowa
-</p>
-
-<div class="price">
-210 zł
-</div>
-
-</div>
-
-</div>
-
-
-<div class="listing">
-
-<div class="listing-img">
-
-<img
-src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=85"
-alt="Przykład streetwear"
->
-
-</div>
-
-<div class="listing-body">
-
-<div class="listing-brand">
-CORTEIZ
-</div>
-
-<h3>
-Corteiz — streetwear
-</h3>
-
-<p>
-Cały produkt • nadruk • metka •
-zbliżenia
-</p>
-
-<div class="price">
-150 zł
-</div>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
+<!-- ================= ZDJECIA ================= -->
 
-<!-- TIPS -->
+<section class="section" id="zdjecia">
 
-<section class="section" id="tips">
-
-<div class="section-head">
-    <div>
-        <h2>✦ Zasady dla tych marek</h2>
-        <p>Najważniejsze rzeczy przed wystawieniem</p>
+    <div class="section-header">
+        <h2>Jak robić zdjęcia, które sprzedają</h2>
+        <p>Prosty system zdjęć do każdego ogłoszenia.</p>
     </div>
-</div>
 
-<div class="tips">
+    <div class="guide-grid">
 
-<div class="tip searchable">
+        <div class="guide">
+            <h3><span>01.</span> Zdjęcie główne</h3>
+            <ul>
+                <li>Cały produkt.</li>
+                <li>Dobre światło.</li>
+                <li>Czyste tło.</li>
+                <li>Produkt wyprostowany.</li>
+                <li>Bez zbędnych przedmiotów.</li>
+            </ul>
+        </div>
 
-<span class="tip-number">
-POLO RALPH LAUREN
-</span>
+        <div class="guide">
+            <h3><span>02.</span> Detale</h3>
+            <ul>
+                <li>Logo.</li>
+                <li>Metka.</li>
+                <li>Rozmiar.</li>
+                <li>Care label.</li>
+                <li>Grafika.</li>
+                <li>Zamek / guziki / hardware.</li>
+            </ul>
+        </div>
 
-<h3>
-Pokazuj detale
-</h3>
+        <div class="guide">
+            <h3><span>03.</span> Wady</h3>
+            <ul>
+                <li>Plamy.</li>
+                <li>Przetarcia.</li>
+                <li>Uszkodzenia.</li>
+                <li>Odbarwienia.</li>
+                <li>Ślady użytkowania.</li>
+            </ul>
+        </div>
 
-<p>
-Przy koszulkach, bluzach i polo warto pokazać
-metkę, logo, materiał oraz stan kołnierzyka,
-rękawów i innych istotnych elementów.
-</p>
+        <div class="guide">
+            <h3><span>04.</span> Wymiary</h3>
+            <ul>
+                <li>Długość.</li>
+                <li>Szerokość.</li>
+                <li>Rękaw.</li>
+                <li>Pas.</li>
+                <li>Inne wymiary istotne dla produktu.</li>
+            </ul>
+        </div>
 
-</div>
-
-
-<div class="tip searchable">
-
-<span class="tip-number">
-DENIM TEARS
-</span>
-
-<h3>
-Dokładnie fotografuj grafikę
-</h3>
-
-<p>
-Nadruk lub charakterystyczny element powinien
-być wyraźny. Dodaj również zdjęcia metek
-i ewentualnych oznak użytkowania.
-</p>
-
-</div>
-
-
-<div class="tip searchable">
-
-<span class="tip-number">
-NIKE
-</span>
-
-<h3>
-Buty = więcej zdjęć
-</h3>
-
-<p>
-Pokaż oba buty, boki, przód, tył, podeszwę,
-metkę rozmiarową i wszystkie widoczne ślady
-użytkowania.
-</p>
-
-</div>
-
-
-<div class="tip searchable">
-
-<span class="tip-number">
-CORTEIZ
-</span>
-
-<h3>
-Nie pomijaj detali
-</h3>
-
-<p>
-Przy charakterystycznych produktach pokaż
-grafiki, metki, szwy, materiał i ogólny stan.
-</p>
-
-</div>
-
-
-<div class="tip searchable">
-
-<span class="tip-number">
-WSZYSTKIE MARKI
-</span>
-
-<h3>
-Nie ukrywaj wad
-</h3>
-
-<p>
-Jeżeli produkt posiada wadę, pokaż ją
-na zdjęciu i opisz w ogłoszeniu.
-</p>
-
-</div>
-
-
-<div class="tip searchable">
-
-<span class="tip-number">
-WSZYSTKIE MARKI
-</span>
-
-<h3>
-Sprawdzaj autentyczność
-</h3>
-
-<p>
-Przy droższych produktach zachowuj dowody
-zakupu lub inne informacje potrzebne do
-potwierdzenia pochodzenia produktu.
-</p>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
+<!-- ================= CENY ================= -->
 
-<!-- CHECKLIST -->
+<section class="section" id="ceny">
+
+    <div class="section-header">
+        <h2>Strategia cenowa</h2>
+        <p>Nie istnieje jedna magiczna cena dla każdego produktu.</p>
+    </div>
+
+    <div class="tip-grid">
+
+        <div class="tip">
+            <div class="tip-number">STRATEGIA A</div>
+            <h3>Szybka sprzedaż</h3>
+            <p>
+                Ustaw cenę atrakcyjnie względem rynku.
+                Dobra strategia, jeśli chcesz szybko uwolnić kapitał.
+            </p>
+        </div>
+
+        <div class="tip">
+            <div class="tip-number">STRATEGIA B</div>
+            <h3>Normalna cena</h3>
+            <p>
+                Cena w okolicach rynku + przestrzeń na negocjację.
+                Dobry wariant dla większości produktów.
+            </p>
+        </div>
+
+        <div class="tip">
+            <div class="tip-number">STRATEGIA C</div>
+            <h3>Premium</h3>
+            <p>
+                Wyższa cena może działać przy rzadkim modelu,
+                bardzo dobrym stanie lub mocnym popycie.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= VINTED ================= -->
+
+<section class="section" id="vinted">
+
+    <div class="section-header">
+        <h2>Vinted — praktyczne zasady</h2>
+        <p>Jak prowadzić ogłoszenia bardziej profesjonalnie.</p>
+    </div>
+
+    <div class="guide">
+
+        <h3><span>Listing od A do Z</span></h3>
+
+        <ul>
+            <li>Wybierz poprawną kategorię.</li>
+            <li>Dodaj właściwą markę.</li>
+            <li>Użyj konkretnego tytułu.</li>
+            <li>Dodaj dobre zdjęcie główne.</li>
+            <li>Pokaż wszystkie istotne detale.</li>
+            <li>Opisz stan zgodnie z prawdą.</li>
+            <li>Dodaj wymiary, jeśli są istotne.</li>
+            <li>Nie ukrywaj wad.</li>
+            <li>Ustal cenę na podstawie rynku.</li>
+            <li>Odpowiadaj kupującym konkretnie.</li>
+            <li>Pakuj produkt bezpiecznie.</li>
+            <li>Przestrzegaj aktualnych zasad platformy.</li>
+        </ul>
+
+    </div>
+
+</section>
+
+<!-- ================= AUTENTYCZNOSC ================= -->
+
+<section class="section" id="autentycznosc">
+
+    <div class="section-header">
+        <h2>Autentyczność</h2>
+        <p>Najważniejsza część resellu markowych rzeczy.</p>
+    </div>
+
+    <div class="rules">
+
+        <h3>⚠ Nie istnieje jeden magiczny test.</h3>
+
+        <p>
+            Nie oceniaj produktu tylko po jednej metce, jednym szwie
+            albo jednym zdjęciu z internetu.
+        </p>
+
+        <p>
+            Porównuj cały produkt: metki, konstrukcję, materiał,
+            nadruki, hafty, logo, jakość wykonania i zgodność
+            z konkretnym modelem.
+        </p>
+
+        <p>
+            Jeśli masz poważne wątpliwości co do autentyczności,
+            najbezpieczniejszą decyzją jest nie kupować produktu
+            przeznaczonego do dalszej sprzedaży jako oryginalny.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ================= CALCULATOR ================= -->
+
+<section class="section" id="calculator">
+
+    <div class="section-header">
+        <h2>Kalkulator resellu</h2>
+        <p>Policz orientacyjny profit przed zakupem.</p>
+    </div>
+
+    <div class="calculator">
+
+        <div class="calc-grid">
+
+            <div class="field">
+                <label>Cena zakupu</label>
+                <input id="buy" type="number" value="80" oninput="calculate()">
+            </div>
+
+            <div class="field">
+                <label>Cena sprzedaży</label>
+                <input id="sell" type="number" value="180" oninput="calculate()">
+            </div>
+
+            <div class="field">
+                <label>Dodatkowe koszty</label>
+                <input id="cost" type="number" value="10" oninput="calculate()">
+            </div>
+
+            <div class="field">
+                <label>Rabat / negocjacja</label>
+                <input id="discount" type="number" value="0" oninput="calculate()">
+            </div>
+
+            <div class="result">
+
+                <div>
+                    <div class="muted">Orientacyjny profit</div>
+                    <div class="profit" id="profit">90 zł</div>
+                </div>
+
+                <div>
+                    <div class="muted">Marża</div>
+                    <strong id="margin">50%</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= CHECKLIST ================= -->
 
 <section class="section" id="checklist">
 
-<div class="section-head">
+    <div class="section-header">
+        <h2>Checklist przed wystawieniem</h2>
+        <p>Odznacz wszystko przed publikacją ogłoszenia.</p>
+    </div>
 
-<div>
-<h2>✓ Checklista przed publikacją</h2>
-<p>Zaznaczenia zapisują się w przeglądarce.</p>
-</div>
+    <div class="check-grid">
 
-</div>
+        <label class="check">
+            <input type="checkbox"> Dobre zdjęcie główne
+        </label>
 
-<div class="card checklist">
+        <label class="check">
+            <input type="checkbox"> Zdjęcia przodu i tyłu
+        </label>
 
-<label class="check">
-<input type="checkbox">
-Cały produkt jest dobrze widoczny
-</label>
+        <label class="check">
+            <input type="checkbox"> Zdjęcie metki
+        </label>
 
-<label class="check">
-<input type="checkbox">
-Zdjęcie główne jest jasne
-</label>
+        <label class="check">
+            <input type="checkbox"> Zdjęcie rozmiaru
+        </label>
 
-<label class="check">
-<input type="checkbox">
-Mam zdjęcie metki
-</label>
+        <label class="check">
+            <input type="checkbox"> Zdjęcie wad
+        </label>
 
-<label class="check">
-<input type="checkbox">
-Mam zdjęcia charakterystycznych detali
-</label>
+        <label class="check">
+            <input type="checkbox"> Poprawna marka
+        </label>
 
-<label class="check">
-<input type="checkbox">
-Pokazałem wszystkie istotne wady
-</label>
+        <label class="check">
+            <input type="checkbox"> Poprawna kategoria
+        </label>
 
-<label class="check">
-<input type="checkbox">
-Podałem właściwy rozmiar
-</label>
+        <label class="check">
+            <input type="checkbox"> Dobry tytuł
+        </label>
 
-<label class="check">
-<input type="checkbox">
-Sprawdziłem podobne oferty
-</label>
+        <label class="check">
+            <input type="checkbox"> Dokładny opis
+        </label>
 
-<label class="check">
-<input type="checkbox">
-Cena jest uzasadniona rynkiem
-</label>
+        <label class="check">
+            <input type="checkbox"> Wymiary
+        </label>
 
-</div>
+        <label class="check">
+            <input type="checkbox"> Cena sprawdzona
+        </label>
+
+        <label class="check">
+            <input type="checkbox"> Produkt gotowy do wysyłki
+        </label>
+
+    </div>
 
 </section>
+
+<!-- ================= FINAL ================= -->
+
+<section class="section">
+
+    <div class="rules">
+
+        <h3>PERSELLER MINDSET</h3>
+
+        <p>
+            Nie chodzi o to, żeby kupować najwięcej.
+            Chodzi o to, żeby podejmować najlepsze decyzje.
+        </p>
+
+        <p>
+            Dobry reseller zna swoje marki, zna rynek,
+            liczy pieniądze i potrafi odpuścić zły zakup.
+        </p>
+
+        <p>
+            <strong>Research → Zakup → Zdjęcia → Listing → Negocjacja → Sprzedaż → Analiza.</strong>
+        </p>
+
+    </div>
+
+</section>
+
+<footer>
+    PERESELLER PRO · Centrum wiedzy o resellu · Black / White / Green
+</footer>
 
 </div>
 </main>
 
-
 <script>
 
-/* FILTROWANIE ZDJĘĆ */
+/* ================= SEARCH ================= */
 
-function filterPhotos(category,button){
-
-    document
-        .querySelectorAll(".filter")
-        .forEach(x=>x.classList.remove("active"));
-
-    button.classList.add("active");
-
-    document
-        .querySelectorAll(".photo-item")
-        .forEach(card=>{
-
-            if(category==="all"){
-                card.style.display="";
-                return;
-            }
-
-            card.style.display =
-                card.classList.contains(category)
-                ? ""
-                : "none";
-        });
-}
-
-
-/* WYSZUKIWARKA PORAD */
-
-function searchCards(){
+function searchTips(){
 
     const query =
-        document
-        .getElementById("search")
+        document.getElementById("search")
         .value
         .toLowerCase()
         .trim();
 
-    document
-        .querySelectorAll(".searchable")
-        .forEach(card=>{
+    document.querySelectorAll(".tip").forEach(card => {
 
-            card.style.display =
-                card.textContent
-                .toLowerCase()
-                .includes(query)
-                ? ""
-                : "none";
+        const text =
+            card.innerText.toLowerCase();
 
-        });
+        card.style.display =
+            text.includes(query)
+            ? "block"
+            : "none";
+
+    });
+
 }
 
 
-/* CHECKLISTA */
+/* ================= CALCULATOR ================= */
 
-document
-    .querySelectorAll(".check input")
-    .forEach((checkbox,index)=>{
+function calculate(){
 
-        const key =
-            "pereseller-pro-check-" + index;
+    const buy =
+        Number(document.getElementById("buy").value) || 0;
 
-        checkbox.checked =
-            localStorage.getItem(key)==="true";
+    const sell =
+        Number(document.getElementById("sell").value) || 0;
 
-        checkbox.addEventListener("change",()=>{
+    const cost =
+        Number(document.getElementById("cost").value) || 0;
 
-            localStorage.setItem(
-                key,
-                checkbox.checked
-            );
+    const discount =
+        Number(document.getElementById("discount").value) || 0;
 
-        });
+    const finalSale =
+        sell - discount;
+
+    const profit =
+        finalSale - buy - cost;
+
+    const margin =
+        finalSale > 0
+        ? (profit / finalSale) * 100
+        : 0;
+
+    document.getElementById("profit").textContent =
+        profit.toFixed(2) + " zł";
+
+    document.getElementById("margin").textContent =
+        margin.toFixed(1) + "%";
+}
+
+
+/* ================= CHECKLIST SAVE ================= */
+
+document.querySelectorAll(".check input")
+.forEach((checkbox,index)=>{
+
+    const key =
+        "pereseller-check-" + index;
+
+    checkbox.checked =
+        localStorage.getItem(key) === "true";
+
+    checkbox.addEventListener("change",()=>{
+
+        localStorage.setItem(
+            key,
+            checkbox.checked
+        );
 
     });
+
+});
+
+
+/* ================= INIT ================= */
+
+calculate();
 
 </script>
 
