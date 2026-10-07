@@ -1,1382 +1,1663 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pereseller — Vinted Reselling OS</title>
 
-  <title>Pereseller — Vinted Reselling Hub</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+:root{
+    --bg:#07080c;
+    --sidebar:#0b0d12;
+    --card:#10131a;
+    --card2:#141820;
+    --border:#242936;
+    --text:#f5f7fb;
+    --muted:#8e96a6;
+    --purple:#8b5cf6;
+    --purple2:#a78bfa;
+    --green:#35d399;
+    --red:#fb7185;
+    --yellow:#fbbf24;
+    --blue:#60a5fa;
+}
 
-    :root {
-      --bg: #08090d;
-      --card: #11131a;
-      --card2: #171923;
-      --border: #292c38;
-      --text: #f5f5f7;
-      --muted: #969aa8;
-      --purple: #8b5cf6;
-      --purple-light: #a78bfa;
-      --green: #35d399;
-      --red: #fb7185;
-    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+html{
+    scroll-behavior:smooth;
+}
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at 80% 0%, #24134d 0%, transparent 30%),
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:
+        radial-gradient(circle at 80% -10%,#25144b 0,transparent 28%),
         var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+    color:var(--text);
+}
+
+button,input,select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100vh;
+    background:rgba(11,13,18,.94);
+    border-right:1px solid var(--border);
+    padding:25px 16px;
+    z-index:100;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:800;
+    letter-spacing:-1.5px;
+    padding:0 12px 30px;
+}
+
+.logo span{
+    color:var(--purple2);
+}
+
+.menu-title{
+    color:#596170;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    font-weight:800;
+    padding:15px 12px 8px;
+}
+
+.menu a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px 12px;
+    border-radius:10px;
+    color:var(--muted);
+    margin-bottom:4px;
+    transition:.2s;
+    font-size:14px;
+    font-weight:600;
+}
+
+.menu a:hover,
+.menu a.active{
+    color:#fff;
+    background:#171525;
+}
+
+.menu-icon{
+    width:25px;
+    text-align:center;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:250px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:72px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 35px;
+    background:rgba(7,8,12,.7);
+    backdrop-filter:blur(20px);
+    position:sticky;
+    top:0;
+    z-index:50;
+}
+
+.search{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#10131a;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:9px 13px;
+    width:310px;
+}
+
+.search input{
+    background:none;
+    border:none;
+    outline:none;
+    color:white;
+    width:100%;
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.icon-btn{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    background:#11141b;
+    border:1px solid var(--border);
+    color:#c4c8d1;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    border-radius:11px;
+    background:linear-gradient(135deg,#8b5cf6,#4f46e5);
+    display:grid;
+    place-items:center;
+    font-weight:800;
+}
+
+/* CONTENT */
+
+.content{
+    padding:35px;
+    max-width:1500px;
+}
+
+.welcome{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:28px;
+}
+
+.welcome h1{
+    font-size:34px;
+    letter-spacing:-1.5px;
+}
+
+.welcome p{
+    color:var(--muted);
+    margin-top:5px;
+}
+
+.primary{
+    background:var(--purple);
+    border:0;
+    color:white;
+    padding:12px 17px;
+    border-radius:10px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.primary:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.08);
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat-card{
+    background:linear-gradient(145deg,#12151c,#0e1015);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px;
+}
+
+.stat-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:16px;
+}
+
+.stat-name{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.stat-icon{
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    display:grid;
+    place-items:center;
+    background:#21183d;
+    color:var(--purple2);
+}
+
+.stat-value{
+    font-size:27px;
+    font-weight:800;
+}
+
+.stat-change{
+    margin-top:7px;
+    font-size:12px;
+    color:var(--green);
+}
+
+/* GRID */
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:18px;
+}
+
+.card{
+    background:linear-gradient(145deg,#11141b,#0d1015);
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:21px;
+}
+
+.card-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.card-header h2{
+    font-size:17px;
+}
+
+.card-header span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* CHART */
+
+.chart{
+    height:250px;
+    display:flex;
+    align-items:end;
+    gap:12px;
+    padding-top:15px;
+}
+
+.bar-wrap{
+    flex:1;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:end;
+    gap:7px;
+    text-align:center;
+}
+
+.bar{
+    width:100%;
+    min-height:10px;
+    border-radius:7px 7px 2px 2px;
+    background:linear-gradient(to top,var(--purple),var(--purple2));
+    transition:.4s;
+}
+
+.bar:hover{
+    filter:brightness(1.2);
+}
+
+.bar-label{
+    font-size:10px;
+    color:var(--muted);
+}
+
+/* QUICK ACTIONS */
+
+.actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.action{
+    background:#151821;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:16px;
+    transition:.2s;
+}
+
+.action:hover{
+    border-color:#51407d;
+    transform:translateY(-2px);
+}
+
+.action strong{
+    display:block;
+    margin-bottom:4px;
+}
+
+.action span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* SECTION */
+
+.section{
+    margin-top:25px;
+}
+
+.section-title{
+    font-size:23px;
+    margin-bottom:15px;
+    letter-spacing:-.5px;
+}
+
+/* CALCULATOR */
+
+.calculator{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.form{
+    display:grid;
+    gap:14px;
+}
+
+.field label{
+    display:block;
+    color:#c5c9d2;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+.field input,
+.field select{
+    width:100%;
+    background:#090b10;
+    color:white;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px;
+    outline:none;
+}
+
+.field input:focus,
+.field select:focus{
+    border-color:var(--purple);
+}
+
+.result{
+    min-height:280px;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    background:
+        radial-gradient(circle at 50% 20%,#29194f,#10131a 60%);
+    border:1px solid #3c2b68;
+    border-radius:16px;
+}
+
+.result small{
+    color:var(--muted);
+}
+
+.result-number{
+    font-size:55px;
+    font-weight:800;
+    margin:8px 0;
+}
+
+.green{
+    color:var(--green);
+}
+
+.red{
+    color:var(--red);
+}
+
+/* PRODUCTS */
+
+.product-form{
+    display:grid;
+    grid-template-columns:repeat(4,1fr) auto;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.product-form input,
+.product-form select{
+    background:#090b10;
+    color:white;
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:11px;
+    outline:none;
+}
+
+.products{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:700px;
+}
+
+th,
+td{
+    text-align:left;
+    padding:14px 10px;
+    border-bottom:1px solid var(--border);
+    font-size:13px;
+}
+
+th{
+    color:var(--muted);
+    font-size:11px;
+    text-transform:uppercase;
+}
+
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:100px;
+    font-size:10px;
+    font-weight:700;
+}
+
+.badge-green{
+    background:#0d3025;
+    color:var(--green);
+}
+
+.badge-yellow{
+    background:#33280c;
+    color:var(--yellow);
+}
+
+/* TIPS */
+
+.tips{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.tip{
+    padding:20px;
+    border:1px solid var(--border);
+    background:#11141a;
+    border-radius:15px;
+}
+
+.tip-number{
+    color:var(--purple2);
+    font-size:12px;
+    font-weight:800;
+}
+
+.tip h3{
+    margin:8px 0;
+}
+
+.tip p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* CHECKLIST */
+
+.checklist{
+    display:grid;
+    gap:9px;
+}
+
+.check{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    padding:12px;
+    background:#0d1015;
+    border:1px solid var(--border);
+    border-radius:10px;
+    color:#cdd1da;
+    font-size:13px;
+}
+
+.check input{
+    accent-color:var(--purple);
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#171a23;
+    border:1px solid #3a4050;
+    padding:13px 17px;
+    border-radius:10px;
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    z-index:500;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* MOBILE */
+
+@media(max-width:1050px){
+
+    .stats{
+        grid-template-columns:1fr 1fr;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    .dashboard-grid{
+        grid-template-columns:1fr;
     }
 
-    .container {
-      width: min(1150px, calc(100% - 32px));
-      margin: auto;
+    .product-form{
+        grid-template-columns:1fr 1fr;
     }
 
-    /* NAVBAR */
+    .tips{
+        grid-template-columns:1fr;
+    }
+}
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(8, 9, 13, 0.85);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--border);
+@media(max-width:750px){
+
+    .sidebar{
+        width:65px;
+        padding:20px 8px;
     }
 
-    .navbar {
-      min-height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+    .logo{
+        font-size:0;
+        text-align:center;
+        padding:0 0 25px;
     }
 
-    .logo {
-      font-size: 25px;
-      font-weight: 900;
-      letter-spacing: -1px;
+    .logo span{
+        display:none;
     }
 
-    .logo span {
-      color: var(--purple-light);
+    .logo::before{
+        content:"P";
+        font-size:25px;
+        color:var(--purple2);
     }
 
-    nav {
-      display: flex;
-      gap: 5px;
-      flex-wrap: wrap;
+    .menu-title{
+        display:none;
     }
 
-    nav a {
-      padding: 8px 12px;
-      border-radius: 9px;
-      color: var(--muted);
-      font-weight: 600;
-      transition: 0.2s;
+    .menu a{
+        justify-content:center;
+        font-size:0;
     }
 
-    nav a:hover {
-      background: var(--card2);
-      color: white;
+    .menu-icon{
+        font-size:18px;
     }
 
-    /* HERO */
-
-    .hero {
-      min-height: 650px;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 50px;
-      align-items: center;
-      padding: 80px 0;
+    .main{
+        margin-left:65px;
     }
 
-    .badge {
-      display: inline-block;
-      background: #19132e;
-      border: 1px solid #3a2b67;
-      color: var(--purple-light);
-      padding: 7px 12px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 1px;
+    .topbar{
+        padding:0 15px;
     }
 
-    h1 {
-      font-size: clamp(45px, 7vw, 75px);
-      line-height: 0.98;
-      letter-spacing: -4px;
-      margin: 20px 0;
+    .search{
+        width:170px;
     }
 
-    h1 span {
-      color: var(--purple-light);
+    .content{
+        padding:22px 15px;
     }
 
-    .hero-text {
-      color: #b6bac5;
-      font-size: 18px;
-      max-width: 650px;
+    .welcome{
+        align-items:start;
+        flex-direction:column;
+        gap:15px;
     }
 
-    .buttons {
-      display: flex;
-      gap: 12px;
-      margin-top: 30px;
-      flex-wrap: wrap;
+    .stats{
+        grid-template-columns:1fr 1fr;
     }
 
-    .btn {
-      border: none;
-      border-radius: 12px;
-      padding: 13px 18px;
-      background: var(--purple);
-      color: white;
-      font-weight: 800;
-      cursor: pointer;
-      transition: 0.2s;
+    .calculator{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:500px){
+
+    .stats{
+        grid-template-columns:1fr;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.1);
+    .product-form{
+        grid-template-columns:1fr;
     }
 
-    .btn.secondary {
-      background: var(--card2);
-      border: 1px solid var(--border);
+    .search{
+        display:none;
     }
 
-    .hero-panel {
-      background: linear-gradient(180deg, #141620, #0e1015);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 25px;
-      box-shadow: 0 30px 90px rgba(0,0,0,.45);
+    .welcome h1{
+        font-size:27px;
     }
-
-    .stat {
-      display: flex;
-      justify-content: space-between;
-      padding: 18px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .stat:last-child {
-      border-bottom: none;
-    }
-
-    .stat span {
-      color: var(--muted);
-    }
-
-    .stat strong {
-      font-size: 18px;
-    }
-
-    /* SECTIONS */
-
-    section {
-      padding: 75px 0;
-    }
-
-    .section-head {
-      margin-bottom: 30px;
-    }
-
-    .eyebrow {
-      color: var(--purple-light);
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    h2 {
-      font-size: 38px;
-      line-height: 1.1;
-      margin-top: 5px;
-      letter-spacing: -1.5px;
-    }
-
-    .section-description {
-      color: var(--muted);
-      margin-top: 8px;
-    }
-
-    /* CARDS */
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .grid-two {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .card {
-      background: linear-gradient(180deg, #12151c, #0e1015);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 23px;
-    }
-
-    .card:hover {
-      border-color: #40376b;
-    }
-
-    .card-icon {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      background: #21183d;
-      color: var(--purple-light);
-      font-weight: 900;
-      margin-bottom: 16px;
-    }
-
-    .card h3 {
-      font-size: 19px;
-      margin-bottom: 7px;
-    }
-
-    .card p {
-      color: #aeb2bd;
-    }
-
-    /* STEPS */
-
-    .steps {
-      display: grid;
-      gap: 12px;
-    }
-
-    .step {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: #0e1015;
-      border: 1px solid var(--border);
-      padding: 15px;
-      border-radius: 13px;
-    }
-
-    .number {
-      flex-shrink: 0;
-      width: 32px;
-      height: 32px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: var(--purple);
-      font-weight: bold;
-    }
-
-    /* CHECKLIST */
-
-    .checklist {
-      display: grid;
-      gap: 10px;
-    }
-
-    .check {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 13px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #0e1015;
-      color: #d5d7dd;
-    }
-
-    .check input {
-      width: 17px;
-      height: 17px;
-      accent-color: var(--purple);
-    }
-
-    /* PRICE TABLE */
-
-    .table-wrapper {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 550px;
-    }
-
-    th,
-    td {
-      text-align: left;
-      padding: 14px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    th {
-      color: var(--purple-light);
-    }
-
-    /* CALCULATOR */
-
-    .calculator {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .form {
-      display: grid;
-      gap: 14px;
-    }
-
-    label {
-      font-weight: bold;
-      font-size: 13px;
-      color: #c9ccd4;
-    }
-
-    input[type="number"] {
-      display: block;
-      width: 100%;
-      margin-top: 6px;
-      padding: 13px;
-      border-radius: 11px;
-      border: 1px solid var(--border);
-      outline: none;
-      background: #090b0f;
-      color: white;
-    }
-
-    input[type="number"]:focus {
-      border-color: var(--purple);
-    }
-
-    .result {
-      min-height: 300px;
-      border-radius: 20px;
-      border: 1px solid #3b2b6b;
-      background:
-        radial-gradient(circle at 50% 20%, #2b1b57, #11131a 65%);
-      display: grid;
-      place-items: center;
-      text-align: center;
-    }
-
-    .result small {
-      color: var(--muted);
-    }
-
-    .result-value {
-      font-size: 55px;
-      line-height: 1;
-      font-weight: 900;
-      margin: 12px 0;
-    }
-
-    .positive {
-      color: var(--green);
-    }
-
-    .negative {
-      color: var(--red);
-    }
-
-    /* TIP */
-
-    .tip {
-      margin-top: 18px;
-      padding: 15px 18px;
-      border-left: 3px solid var(--purple);
-      border-radius: 0 12px 12px 0;
-      background: #14121d;
-      color: #c7cad3;
-    }
-
-    /* FOOTER */
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 0 60px;
-      color: var(--muted);
-    }
-
-    footer strong {
-      color: white;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 850px) {
-      nav {
-        display: none;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 55px 0;
-      }
-
-      .grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .grid-two,
-      .calculator {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 550px) {
-      .container {
-        width: calc(100% - 22px);
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        letter-spacing: -2px;
-      }
-
-      h2 {
-        font-size: 30px;
-      }
-
-      .result-value {
-        font-size: 45px;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <div class="container navbar">
+<!-- SIDEBAR -->
 
-    <a href="#" class="logo">
-      Pe<span>reseller</span>
-    </a>
+<aside class="sidebar">
 
-    <nav>
-      <a href="#start">Start</a>
-      <a href="#produkty">Produkty</a>
-      <a href="#zdjecia">Zdjęcia</a>
-      <a href="#ceny">Ceny</a>
-      <a href="#sprzedaz">Sprzedaż</a>
-      <a href="#wysylka">Wysyłka</a>
-      <a href="#kalkulator">Kalkulator</a>
-    </nav>
-
-  </div>
-</header>
-
-
-<main>
-
-<!-- HERO -->
-
-<section class="hero container" id="start">
-
-  <div>
-
-    <span class="badge">
-      VINTED • RESELLING • HUB
-    </span>
-
-    <h1>
-      Sprzedawaj mądrzej.
-      <br>
-      <span>Zarabiaj świadomie.</span>
-    </h1>
-
-    <p class="hero-text">
-      Pereseller to centrum wiedzy dla osób, które chcą
-      ogarnąć reselling na Vinted — od znalezienia produktu,
-      przez zdjęcia i cenę, aż po wysyłkę i liczenie zysku.
-    </p>
-
-    <div class="buttons">
-      <a href="#kalkulator" class="btn">
-        Policz zysk
-      </a>
-
-      <a href="#produkty" class="btn secondary">
-        Zacznij naukę
-      </a>
+    <div class="logo">
+        Pe<span>reseller</span>
     </div>
 
-  </div>
+    <div class="menu-title">Dashboard</div>
 
+    <div class="menu">
 
-  <div class="hero-panel">
+        <a href="#dashboard" class="active">
+            <span class="menu-icon">⌂</span>
+            Dashboard
+        </a>
 
-    <div class="stat">
-      <span>Najważniejsze</span>
-      <strong>Produkt + cena</strong>
-    </div>
+        <a href="#calculator">
+            <span class="menu-icon">₿</span>
+            Kalkulator
+        </a>
 
-    <div class="stat">
-      <span>Zdjęcia</span>
-      <strong>Jasne i prawdziwe</strong>
-    </div>
+        <a href="#products">
+            <span class="menu-icon">▣</span>
+            Produkty
+        </a>
 
-    <div class="stat">
-      <span>Opis</span>
-      <strong>Konkretny</strong>
-    </div>
+        <a href="#tips">
+            <span class="menu-icon">✦</span>
+            Porady
+        </a>
 
-    <div class="stat">
-      <span>Cel</span>
-      <strong>Realny zysk</strong>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- PRODUKTY -->
-
-<section id="produkty">
-
-  <div class="container">
-
-    <div class="section-head">
-      <div class="eyebrow">01 • Produkty</div>
-
-      <h2>
-        Co kupować do resellu?
-      </h2>
-
-      <p class="section-description">
-        Nie kupuj tylko dlatego, że coś jest tanie.
-        Najpierw sprawdź popyt i możliwą cenę sprzedaży.
-      </p>
-    </div>
-
-
-    <div class="grid">
-
-      <div class="card">
-
-        <div class="card-icon">
-          01
-        </div>
-
-        <h3>
-          Wybierz niszę
-        </h3>
-
-        <p>
-          Na start skup się na 1–2 kategoriach:
-          bluzy, kurtki, spodnie, buty, vintage,
-          sport albo akcesoria.
-        </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="card-icon">
-          02
-        </div>
-
-        <h3>
-          Sprawdź rynek
-        </h3>
-
-        <p>
-          Porównuj podobne modele, stan, rozmiar
-          oraz ceny. Cena wystawienia nie oznacza,
-          że rzecz sprzeda się właśnie za tyle.
-        </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="card-icon">
-          03
-        </div>
-
-        <h3>
-          Policz przed zakupem
-        </h3>
-
-        <p>
-          Oszacuj cenę sprzedaży i wszystkie swoje
-          koszty. Jeśli marża jest zbyt mała,
-          odpuść zakup.
-        </p>
-
-      </div>
+        <a href="#checklist">
+            <span class="menu-icon">✓</span>
+            Checklista
+        </a>
 
     </div>
 
-  </div>
+    <div class="menu-title">Vinted</div>
 
-</section>
+    <div class="menu">
 
+        <a href="#photos">
+            <span class="menu-icon">▧</span>
+            Zdjęcia
+        </a>
 
-<!-- ZDJĘCIA -->
+        <a href="#pricing">
+            <span class="menu-icon">◈</span>
+            Ceny
+        </a>
 
-<section id="zdjecia">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="eyebrow">
-        02 • Zdjęcia
-      </div>
-
-      <h2>
-        Zdjęcia, które sprzedają
-      </h2>
+        <a href="#shipping">
+            <span class="menu-icon">□</span>
+            Wysyłka
+        </a>
 
     </div>
 
+</aside>
 
-    <div class="grid-two">
 
-      <div class="card">
+<!-- MAIN -->
 
-        <h3>
-          Idealny zestaw zdjęć
-        </h3>
+<div class="main">
 
-        <br>
+    <header class="topbar">
 
-        <div class="steps">
-
-          <div class="step">
-            <span class="number">1</span>
-            Cały produkt jako główne zdjęcie
-          </div>
-
-          <div class="step">
-            <span class="number">2</span>
-            Przód i tył
-          </div>
-
-          <div class="step">
-            <span class="number">3</span>
-            Logo i metka
-          </div>
-
-          <div class="step">
-            <span class="number">4</span>
-            Rozmiar i skład
-          </div>
-
-          <div class="step">
-            <span class="number">5</span>
-            Charakterystyczne detale
-          </div>
-
-          <div class="step">
-            <span class="number">6</span>
-            Każda wada
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="card">
-
-        <h3>
-          Checklista zdjęcia
-        </h3>
-
-        <br>
-
-        <div class="checklist">
-
-          <label class="check">
-            <input type="checkbox">
-            Naturalne, dobre światło
-          </label>
-
-          <label class="check">
-            <input type="checkbox">
-            Czyste, neutralne tło
-          </label>
-
-          <label class="check">
-            <input type="checkbox">
-            Czysty obiektyw telefonu
-          </label>
-
-          <label class="check">
-            <input type="checkbox">
-            Rzecz jest czysta
-          </label>
-
-          <label class="check">
-            <input type="checkbox">
-            Wszystkie wady pokazane
-          </label>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- CENY -->
-
-<section id="ceny">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="eyebrow">
-        03 • Ceny
-      </div>
-
-      <h2>
-        Jak ustalać cenę?
-      </h2>
-
-    </div>
-
-
-    <div class="grid-two">
-
-      <div class="card">
-
-        <h3>
-          Nie patrz tylko na cenę sklepową
-        </h3>
-
-        <p>
-          Najważniejsza jest aktualna sytuacja na Vinted.
-          Porównuj podobną markę, model, stan, rozmiar
-          i jakość zdjęć.
-        </p>
-
-        <div class="tip">
-
-          Przykład: jeśli chcesz finalnie sprzedać
-          produkt za około 80 zł, możesz zacząć
-          np. od 89–95 zł i zostawić trochę miejsca
-          na negocjacje.
-
-        </div>
-
-      </div>
-
-
-      <div class="card">
-
-        <h3>
-          Orientacyjne poziomy
-        </h3>
-
-        <br>
-
-        <div class="table-wrapper">
-
-          <table>
-
-            <thead>
-              <tr>
-                <th>Stan</th>
-                <th>Orientacyjnie</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td>Nowy / jak nowy</td>
-                <td>60–80%</td>
-              </tr>
-
-              <tr>
-                <td>Bardzo dobry</td>
-                <td>40–60%</td>
-              </tr>
-
-              <tr>
-                <td>Dobry</td>
-                <td>20–40%</td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-        <br>
-
-        <small style="color:var(--muted)">
-          To tylko punkt odniesienia. Aktualny rynek
-          jest ważniejszy niż sama cena sklepowa.
-        </small>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- WYSTAWIANIE -->
-
-<section id="sprzedaz">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="eyebrow">
-        04 • Ogłoszenie
-      </div>
-
-      <h2>
-        Wystawienie krok po kroku
-      </h2>
-
-    </div>
-
-
-    <div class="grid">
-
-      <div class="card">
-
-        <div class="card-icon">
-          T
-        </div>
-
-        <h3>
-          Tytuł
-        </h3>
-
-        <p>
-          Marka + model + rodzaj + kolor + rozmiar.
-          Bez spamowania przypadkowymi markami.
-        </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="card-icon">
-          O
-        </div>
-
-        <h3>
-          Opis
-        </h3>
-
-        <p>
-          Stan, rozmiar, kolor, materiał, wymiary
-          i wszystkie istotne wady.
-        </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="card-icon">
-          K
-        </div>
-
-        <h3>
-          Kategoria
-        </h3>
-
-        <p>
-          Wybierz właściwą kategorię, markę
-          i parametry produktu.
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <br>
-
-
-    <div class="card">
-
-      <h3>
-        Przykładowy opis
-      </h3>
-
-      <br>
-
-      <p>
-        <strong>Stan:</strong> bardzo dobry
-        <br>
-
-        <strong>Rozmiar:</strong> M
-        <br>
-
-        <strong>Kolor:</strong> czarny
-        <br>
-
-        <strong>Wymiary:</strong> długość XX cm,
-        szerokość pod pachami XX cm
-        <br><br>
-
-        Brak dziur i plam. Ewentualne ślady
-        użytkowania widoczne na zdjęciach.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- OPTYMALIZACJA -->
-
-<section>
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="eyebrow">
-        05 • Optymalizacja
-      </div>
-
-      <h2>
-        Gdy produkt się nie sprzedaje
-      </h2>
-
-    </div>
-
-
-    <div class="grid">
-
-      <div class="card">
-
-        <h3>
-          0 zainteresowania
-        </h3>
-
-        <p>
-          Sprawdź zdjęcie główne, tytuł, kategorię,
-          cenę i to, czy produkt ma popyt.
-        </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <h3>
-          Dużo polubień
-        </h3>
-
-        <p>
-          Jeśli ludzie obserwują ofertę, ale nie kupują,
-          cena może być za wysoka. Testuj małe obniżki.
-        </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <h3>
-          30+ dni
-        </h3>
-
-        <p>
-          Rozważ zmianę zdjęcia, opisu lub ceny.
-          Nie zamrażaj kapitału bez końca.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- WYSYŁKA -->
-
-<section id="wysylka">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="eyebrow">
-        06 • Wysyłka
-      </div>
-
-      <h2>
-        Co robić po sprzedaży?
-      </h2>
-
-    </div>
-
-
-    <div class="grid-two">
-
-      <div class="card">
-
-        <div class="steps">
-
-          <div class="step">
-            <span class="number">1</span>
-            Sprawdź właściwy produkt.
-          </div>
-
-          <div class="step">
-            <span class="number">2</span>
-            Ponownie sprawdź jego stan.
-          </div>
-
-          <div class="step">
-            <span class="number">3</span>
-            Zrób zdjęcie produktu i paczki.
-          </div>
-
-          <div class="step">
-            <span class="number">4</span>
-            Odpowiednio zapakuj.
-          </div>
-
-          <div class="step">
-            <span class="number">5</span>
-            Nadaj zgodnie z zamówieniem.
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="card">
-
-        <h3>
-          Organizacja
-        </h3>
-
-        <p>
-          Na Vinted standardowo masz określony czas
-          na wysłanie przedmiotu. Zawsze sprawdzaj
-          aktualne informacje dotyczące konkretnego
-          zamówienia i przewoźnika w aplikacji.
-        </p>
-
-        <div class="tip">
-
-          Dobra organizacja wysyłek oznacza mniej
-          pomyłek, mniej stresu i lepszą obsługę
-          kupujących.
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- KALKULATOR -->
-
-<section id="kalkulator">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="eyebrow">
-        07 • Finanse
-      </div>
-
-      <h2>
-        Kalkulator zysku
-      </h2>
-
-      <p class="section-description">
-        Wpisz liczby i sprawdź, ile zostaje po zakupie
-        i dodatkowych kosztach.
-      </p>
-
-    </div>
-
-
-    <div class="calculator">
-
-      <div class="card">
-
-        <div class="form">
-
-          <label>
-            Cena zakupu
+        <div class="search">
+            🔎
             <input
-              id="buy"
-              type="number"
-              min="0"
-              step="0.01"
-              value="25"
+                id="searchInput"
+                type="text"
+                placeholder="Szukaj porad..."
+                onkeyup="searchTips()"
             >
-          </label>
+        </div>
 
+        <div class="top-actions">
 
-          <label>
-            Cena sprzedaży
-            <input
-              id="sell"
-              type="number"
-              min="0"
-              step="0.01"
-              value="70"
+            <button
+                class="icon-btn"
+                onclick="showToast('Pereseller działa lokalnie w przeglądarce.')"
             >
-          </label>
+                ♢
+            </button>
 
-
-          <label>
-            Dodatkowe koszty
-            <input
-              id="cost"
-              type="number"
-              min="0"
-              step="0.01"
-              value="5"
-            >
-          </label>
-
-
-          <button
-            class="btn"
-            onclick="calculateProfit()"
-          >
-            Oblicz zysk
-          </button>
+            <div class="avatar">
+                P
+            </div>
 
         </div>
 
-      </div>
+    </header>
 
 
-      <div class="result">
+    <main class="content" id="dashboard">
 
-        <div>
+        <!-- WELCOME -->
 
-          <small>
-            SZACOWANY ZYSK
-          </small>
+        <div class="welcome">
 
-          <div
-            id="profit"
-            class="result-value positive"
-          >
-            40,00 zł
-          </div>
+            <div>
 
-          <small id="margin">
-            Marża: 57,1%
-          </small>
+                <h1>
+                    Witaj w Pereseller 👋
+                </h1>
+
+                <p>
+                    Twoje centrum do ogarniania resellingu na Vinted.
+                </p>
+
+            </div>
+
+            <button
+                class="primary"
+                onclick="document.getElementById('calculator').scrollIntoView()"
+            >
+                + Policz nowy produkt
+            </button>
 
         </div>
 
-      </div>
 
-    </div>
+        <!-- STATS -->
 
-  </div>
+        <div class="stats">
 
-</section>
+            <div class="stat-card">
 
+                <div class="stat-top">
+                    <span class="stat-name">Przykładowy obrót</span>
+                    <div class="stat-icon">↗</div>
+                </div>
 
-<!-- CHECKLISTA -->
+                <div class="stat-value">
+                    1 240 zł
+                </div>
 
-<section>
+                <div class="stat-change">
+                    +18,4% vs. poprzedni okres
+                </div>
 
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="eyebrow">
-        08 • Checklista
-      </div>
-
-      <h2>
-        Przed wystawieniem
-      </h2>
-
-    </div>
+            </div>
 
 
-    <div class="card checklist">
+            <div class="stat-card">
 
-      <label class="check">
-        <input type="checkbox">
-        Produkt jest czysty i przygotowany
-      </label>
+                <div class="stat-top">
+                    <span class="stat-name">Zysk</span>
+                    <div class="stat-icon">₿</div>
+                </div>
 
-      <label class="check">
-        <input type="checkbox">
-        Sprawdziłem wszystkie wady
-      </label>
+                <div class="stat-value">
+                    486 zł
+                </div>
 
-      <label class="check">
-        <input type="checkbox">
-        Mam dobre zdjęcie główne
-      </label>
+                <div class="stat-change">
+                    +12,7%
+                </div>
 
-      <label class="check">
-        <input type="checkbox">
-        Dodałem zdjęcia metek i detali
-      </label>
-
-      <label class="check">
-        <input type="checkbox">
-        Zmierzyłem produkt
-      </label>
-
-      <label class="check">
-        <input type="checkbox">
-        Sprawdziłem podobne oferty
-      </label>
-
-      <label class="check">
-        <input type="checkbox">
-        Cena daje mi sensowną marżę
-      </label>
-
-      <label class="check">
-        <input type="checkbox">
-        Wybrałem właściwą kategorię i markę
-      </label>
-
-    </div>
-
-  </div>
-
-</section>
-
-</main>
+            </div>
 
 
-<footer>
+            <div class="stat-card">
 
-  <div class="container">
+                <div class="stat-top">
+                    <span class="stat-name">Produkty</span>
+                    <div class="stat-icon">▣</div>
+                </div>
 
-    <strong>Pereseller</strong>
-    — Vinted Reselling Hub.
+                <div class="stat-value">
+                    27
+                </div>
 
-    <br><br>
+                <div class="stat-change">
+                    8 sprzedanych
+                </div>
 
-    Materiał edukacyjny. Zasady Vinted, opcje dostawy
-    oraz funkcje platformy mogą się zmieniać.
-    Przed sprzedażą sprawdź aktualne informacje
-    bezpośrednio w Vinted.
+            </div>
 
-  </div>
 
-</footer>
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span class="stat-name">Średnia marża</span>
+                    <div class="stat-icon">%</div>
+                </div>
+
+                <div class="stat-value">
+                    39,2%
+                </div>
+
+                <div class="stat-change">
+                    +4,1%
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD GRID -->
+
+        <div class="dashboard-grid">
+
+            <!-- CHART -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h2>
+                        Wyniki sprzedaży
+                    </h2>
+
+                    <span>
+                        Ostatnie 7 okresów
+                    </span>
+
+                </div>
+
+                <div class="chart">
+
+                    <div class="bar-wrap">
+                        <div class="bar" style="height:35%"></div>
+                        <span class="bar-label">PON</span>
+                    </div>
+
+                    <div class="bar-wrap">
+                        <div class="bar" style="height:52%"></div>
+                        <span class="bar-label">WT</span>
+                    </div>
+
+                    <div class="bar-wrap">
+                        <div class="bar" style="height:44%"></div>
+                        <span class="bar-label">ŚR</span>
+                    </div>
+
+                    <div class="bar-wrap">
+                        <div class="bar" style="height:72%"></div>
+                        <span class="bar-label">CZW</span>
+                    </div>
+
+                    <div class="bar-wrap">
+                        <div class="bar" style="height:62%"></div>
+                        <span class="bar-label">PT</span>
+                    </div>
+
+                    <div class="bar-wrap">
+                        <div class="bar" style="height:85%"></div>
+                        <span class="bar-label">SOB</span>
+                    </div>
+
+                    <div class="bar-wrap">
+                        <div class="bar" style="height:68%"></div>
+                        <span class="bar-label">ND</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h2>
+                        Szybkie akcje
+                    </h2>
+
+                </div>
+
+                <div class="actions">
+
+                    <a href="#calculator" class="action">
+                        <strong>💰 Kalkulator</strong>
+                        <span>Policz marżę produktu</span>
+                    </a>
+
+                    <a href="#products" class="action">
+                        <strong>📦 Produkt</strong>
+                        <span>Dodaj do listy</span>
+                    </a>
+
+                    <a href="#photos" class="action">
+                        <strong>📸 Zdjęcia</strong>
+                        <span>Poradnik fotografii</span>
+                    </a>
+
+                    <a href="#pricing" class="action">
+                        <strong>🏷️ Cena</strong>
+                        <span>Ustal cenę</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CALCULATOR -->
+
+        <section class="section" id="calculator">
+
+            <h2 class="section-title">
+                Kalkulator resellera
+            </h2>
+
+            <div class="calculator">
+
+                <div class="card">
+
+                    <div class="form">
+
+                        <div class="field">
+                            <label>
+                                Cena zakupu
+                            </label>
+
+                            <input
+                                id="buy"
+                                type="number"
+                                value="25"
+                                min="0"
+                                step="0.01"
+                            >
+                        </div>
+
+
+                        <div class="field">
+                            <label>
+                                Planowana cena sprzedaży
+                            </label>
+
+                            <input
+                                id="sell"
+                                type="number"
+                                value="80"
+                                min="0"
+                                step="0.01"
+                            >
+                        </div>
+
+
+                        <div class="field">
+                            <label>
+                                Twoje dodatkowe koszty
+                            </label>
+
+                            <input
+                                id="cost"
+                                type="number"
+                                value="5"
+                                min="0"
+                                step="0.01"
+                            >
+                        </div>
+
+
+                        <button
+                            class="primary"
+                            onclick="calculate()"
+                        >
+                            Oblicz
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="result">
+
+                    <div>
+
+                        <small>
+                            SZACOWANY ZYSK
+                        </small>
+
+                        <div
+                            id="profit"
+                            class="result-number green"
+                        >
+                            50,00 zł
+                        </div>
+
+                        <small id="margin">
+                            Marża: 62,5%
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRODUCTS -->
+
+        <section class="section" id="products">
+
+            <h2 class="section-title">
+                Twoje produkty
+            </h2>
+
+            <div class="card">
+
+                <div class="product-form">
+
+                    <input
+                        id="productName"
+                        placeholder="Nazwa produktu"
+                    >
+
+                    <input
+                        id="productBuy"
+                        type="number"
+                        placeholder="Zakup"
+                    >
+
+                    <input
+                        id="productSell"
+                        type="number"
+                        placeholder="Sprzedaż"
+                    >
+
+                    <select id="productStatus">
+                        <option>Wystawiony</option>
+                        <option>Obserwowany</option>
+                        <option>Sprzedany</option>
+                    </select>
+
+                    <button
+                        class="primary"
+                        onclick="addProduct()"
+                    >
+                        Dodaj
+                    </button>
+
+                </div>
+
+
+                <div class="products">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Produkt</th>
+                                <th>Zakup</th>
+                                <th>Sprzedaż</th>
+                                <th>Zysk</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="productTable">
+
+                            <tr>
+                                <td>Przykładowa bluza</td>
+                                <td>25 zł</td>
+                                <td>80 zł</td>
+                                <td class="green">+55 zł</td>
+                                <td>
+                                    <span class="badge badge-green">
+                                        Wystawiony
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PHOTOS -->
+
+        <section class="section" id="photos">
+
+            <h2 class="section-title">
+                📸 Zdjęcia na Vinted
+            </h2>
+
+            <div class="tips">
+
+                <div class="tip">
+
+                    <span class="tip-number">
+                        01
+                    </span>
+
+                    <h3>
+                        Światło
+                    </h3>
+
+                    <p>
+                        Najlepiej korzystać z jasnego,
+                        naturalnego światła. Unikaj bardzo
+                        ciemnych zdjęć.
+                    </p>
+
+                </div>
+
+
+                <div class="tip">
+
+                    <span class="tip-number">
+                        02
+                    </span>
+
+                    <h3>
+                        Pierwsze zdjęcie
+                    </h3>
+
+                    <p>
+                        Pokaż cały produkt i zadbaj,
+                        żeby był dobrze widoczny już
+                        na miniaturce.
+                    </p>
+
+                </div>
+
+
+                <div class="tip">
+
+                    <span class="tip-number">
+                        03
+                    </span>
+
+                    <h3>
+                        Wady
+                    </h3>
+
+                    <p>
+                        Każdą istotną wadę pokaż na zdjęciu
+                        i opisz w ogłoszeniu.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRICING -->
+
+        <section class="section" id="pricing">
+
+            <h2 class="section-title">
+                🏷️ Strategia cenowa
+            </h2>
+
+            <div class="grid">
+
+                <div class="card">
+
+                    <h3>
+                        Sprawdź konkurencję
+                    </h3>
+
+                    <p>
+                        Szukaj podobnego modelu, marki,
+                        stanu i rozmiaru. Nie zakładaj,
+                        że wysoka cena innych ofert
+                        oznacza wysoką cenę sprzedaży.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>
+                        Zostaw miejsce na negocjacje
+                    </h3>
+
+                    <p>
+                        Jeżeli Twoim celem jest 80 zł,
+                        możesz rozpocząć np. trochę wyżej,
+                        o ile cena nadal jest konkurencyjna.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>
+                        Nie zamrażaj kapitału
+                    </h3>
+
+                    <p>
+                        Jeśli produkt długo się nie sprzedaje,
+                        testuj zmianę zdjęć, opisu i ceny.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SHIPPING -->
+
+        <section class="section" id="shipping">
+
+            <h2 class="section-title">
+                📦 Wysyłka
+            </h2>
+
+            <div class="grid">
+
+                <div class="card">
+                    <h3>1. Sprawdź</h3>
+                    <p>
+                        Upewnij się, że wysyłasz dokładnie
+                        ten produkt, który kupił klient.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>2. Zabezpiecz</h3>
+                    <p>
+                        Dobierz opakowanie odpowiednie
+                        do rozmiaru i rodzaju produktu.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>3. Nadaj</h3>
+                    <p>
+                        Postępuj zgodnie z instrukcjami
+                        dotyczącymi wybranej dostawy.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TIPS -->
+
+        <section class="section" id="tips">
+
+            <h2 class="section-title">
+                ✦ Najważniejsze zasady
+            </h2>
+
+            <div id="tipsContainer" class="tips">
+
+                <div class="tip searchable">
+                    <span class="tip-number">TIP 01</span>
+                    <h3>Nie kupuj w ciemno</h3>
+                    <p>
+                        Najpierw sprawdź rynek, potem
+                        podejmuj decyzję zakupową.
+                    </p>
+                </div>
+
+                <div class="tip searchable">
+                    <span class="tip-number">TIP 02</span>
+                    <h3>Liczy się marża</h3>
+                    <p>
+                        Duży obrót nie oznacza dużego zysku.
+                        Zawsze licz swoje koszty.
+                    </p>
+                </div>
+
+                <div class="tip searchable">
+                    <span class="tip-number">TIP 03</span>
+                    <h3>Regularność</h3>
+                    <p>
+                        Lepiej konsekwentnie dodawać dobre
+                        oferty niż wrzucać przypadkowo
+                        ogromną liczbę produktów.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CHECKLIST -->
+
+        <section class="section" id="checklist">
+
+            <h2 class="section-title">
+                ✓ Checklista przed wystawieniem
+            </h2>
+
+            <div class="card checklist">
+
+                <label class="check">
+                    <input type="checkbox">
+                    Produkt jest czysty
+                </label>
+
+                <label class="check">
+                    <input type="checkbox">
+                    Sprawdziłem wszystkie wady
+                </label>
+
+                <label class="check">
+                    <input type="checkbox">
+                    Zrobiłem dobre zdjęcie główne
+                </label>
+
+                <label class="check">
+                    <input type="checkbox">
+                    Mam zdjęcia metek
+                </label>
+
+                <label class="check">
+                    <input type="checkbox">
+                    Zmierzyłem produkt
+                </label>
+
+                <label class="check">
+                    <input type="checkbox">
+                    Sprawdziłem podobne oferty
+                </label>
+
+                <label class="check">
+                    <input type="checkbox">
+                    Ustaliłem cenę
+                </label>
+
+                <label class="check">
+                    <input type="checkbox">
+                    Wybrałem właściwą kategorię
+                </label>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<div id="toast" class="toast">
+    Gotowe!
+</div>
 
 
 <script>
 
-function calculateProfit() {
+/* KALKULATOR */
 
-  const buy =
-    Number(document.getElementById("buy").value) || 0;
+function calculate(){
 
-  const sell =
-    Number(document.getElementById("sell").value) || 0;
+    const buy =
+        Number(document.getElementById("buy").value) || 0;
 
-  const cost =
-    Number(document.getElementById("cost").value) || 0;
+    const sell =
+        Number(document.getElementById("sell").value) || 0;
+
+    const cost =
+        Number(document.getElementById("cost").value) || 0;
+
+    const profit =
+        sell - buy - cost;
+
+    const margin =
+        sell > 0
+        ? (profit / sell) * 100
+        : 0;
+
+    const result =
+        document.getElementById("profit");
+
+    result.textContent =
+        profit.toLocaleString("pl-PL",{
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }) + " zł";
+
+    result.className =
+        "result-number " +
+        (profit >= 0 ? "green" : "red");
+
+    document.getElementById("margin").textContent =
+        "Marża: " +
+        margin.toFixed(1).replace(".",",") +
+        "%";
+}
 
 
-  const profit =
-    sell - buy - cost;
+/* DODAWANIE PRODUKTU */
 
+function addProduct(){
 
-  const margin =
-    sell > 0
-      ? (profit / sell) * 100
-      : 0;
+    const name =
+        document.getElementById("productName").value.trim();
 
+    const buy =
+        Number(document.getElementById("productBuy").value);
 
-  const profitElement =
-    document.getElementById("profit");
+    const sell =
+        Number(document.getElementById("productSell").value);
 
+    const status =
+        document.getElementById("productStatus").value;
 
-  profitElement.textContent =
-    profit.toLocaleString("pl-PL", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }) + " zł";
+    if(!name || isNaN(buy) || isNaN(sell)){
+        showToast("Uzupełnij dane produktu.");
+        return;
+    }
 
+    const profit = sell - buy;
 
-  profitElement.className =
-    "result-value " +
-    (profit >= 0 ? "positive" : "negative");
+    const row =
+        document.createElement("tr");
 
+    const statusClass =
+        status === "Sprzedany"
+        ? "badge-green"
+        : "badge-yellow";
 
-  document.getElementById("margin").textContent =
-    "Marża: " +
-    margin.toFixed(1).replace(".", ",") +
-    "%";
+    row.innerHTML = `
+        <td>${escapeHtml(name)}</td>
+        <td>${buy.toFixed(2)} zł</td>
+        <td>${sell.toFixed(2)} zł</td>
+        <td class="${profit >= 0 ? "green" : "red"}">
+            ${profit >= 0 ? "+" : ""}
+            ${profit.toFixed(2)} zł
+        </td>
+        <td>
+            <span class="badge ${statusClass}">
+                ${escapeHtml(status)}
+            </span>
+        </td>
+    `;
+
+    document.getElementById("productTable")
+        .appendChild(row);
+
+    document.getElementById("productName").value = "";
+    document.getElementById("productBuy").value = "";
+    document.getElementById("productSell").value = "";
+
+    showToast("Produkt dodany.");
 
 }
 
 
-calculateProfit();
+/* BEZPIECZNE WSTAWIANIE TEKSTU */
+
+function escapeHtml(text){
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+}
+
+
+/* SEARCH */
+
+function searchTips(){
+
+    const query =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const tips =
+        document.querySelectorAll(".searchable");
+
+    tips.forEach(tip => {
+
+        const text =
+            tip.textContent.toLowerCase();
+
+        tip.style.display =
+            text.includes(query)
+            ? ""
+            : "none";
+
+    });
+
+}
+
+
+/* TOAST */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+
+/* ZAPIS CHECKLISTY */
+
+document
+.querySelectorAll(".check input")
+.forEach((checkbox,index)=>{
+
+    const saved =
+        localStorage.getItem(
+            "pereseller-check-"+index
+        );
+
+    checkbox.checked =
+        saved === "true";
+
+    checkbox.addEventListener(
+        "change",
+        ()=>{
+            localStorage.setItem(
+                "pereseller-check-"+index,
+                checkbox.checked
+            );
+        }
+    );
+
+});
+
+
+/* AUTO KALKULACJA */
+
+document
+.querySelectorAll("#buy,#sell,#cost")
+.forEach(input=>{
+
+    input.addEventListener(
+        "input",
+        calculate
+    );
+
+});
+
+
+calculate();
 
 </script>
 
